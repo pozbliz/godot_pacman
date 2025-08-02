@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtnkl6qjkjy5w"]
+
+[ext_resource type="Script" uid="uid://7dlwbdnout5k" path="res://world/coins/coin.gd" id="1_sl4bs"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sl4bs"]
+
+[node name="Coin" type="Area2D"]
+script = ExtResource("1_sl4bs")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_sl4bs")

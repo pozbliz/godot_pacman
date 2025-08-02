@@ -24,5 +24,8 @@ func update_score(score):
 func update_highscore(score):
 	pass
 	
+func update_lives(lives):
+	pass
+	
 func _on_message_timer_timeout():
 	$MarginContainer/Message.hide()

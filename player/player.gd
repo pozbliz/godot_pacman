@@ -6,8 +6,7 @@ const SPEED = 200.0
 
 var direction: Vector2 = Vector2.ZERO
 
-signal player_died
-
+signal player_hit
 
 func _ready() -> void:
 	hide()
@@ -15,7 +14,10 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	velocity = direction * SPEED
 	
-	move_and_slide()
+	var collision = move_and_collide(velocity * delta)
+	if collision:
+		if collision.get_collider() is Ghost:
+			player_hit.emit()
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("move_left"):
@@ -31,4 +33,5 @@ func reset_player():
 	show()
 	velocity = Vector2.ZERO
 	$CollisionShape2D.set_deferred("disabled", false)
+	
 	

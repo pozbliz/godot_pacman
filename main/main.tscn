@@ -1,16 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://eitigiq55372"]
+[gd_scene load_steps=6 format=3 uid="uid://eitigiq55372"]
 
 [ext_resource type="Script" uid="uid://pupn2o3umkd7" path="res://main/main.gd" id="1_pjrb6"]
+[ext_resource type="PackedScene" uid="uid://dtnkl6qjkjy5w" path="res://world/coins/coin.tscn" id="2_3wy1v"]
 [ext_resource type="PackedScene" uid="uid://qymt3rlyjx6q" path="res://player/player.tscn" id="2_c651c"]
 [ext_resource type="PackedScene" uid="uid://dh0kc5ysas7xu" path="res://ui/ui.tscn" id="2_xwkvk"]
+[ext_resource type="PackedScene" uid="uid://82m4fmnms6yk" path="res://world/ghosts/ghost.tscn" id="3_3wy1v"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_pjrb6")
+coin_scene = ExtResource("2_3wy1v")
+enemy_scene = ExtResource("3_3wy1v")
 
 [node name="Player" parent="." instance=ExtResource("2_c651c")]
-
-[node name="PlayerStartPosition" type="Marker2D" parent="."]
-position = Vector2(500, 500)
 
 [node name="UI" parent="." instance=ExtResource("2_xwkvk")]
 
@@ -19,3 +20,14 @@ position = Vector2(500, 500)
 [node name="AudioGameplay" type="AudioStreamPlayer" parent="Audio"]
 
 [node name="AudioMainMenu" type="AudioStreamPlayer" parent="Audio"]
+
+[node name="ReadyTimer" type="Timer" parent="."]
+process_mode = 3
+wait_time = 2.0
+
+[node name="StartPositions" type="Node" parent="."]
+
+[node name="PlayerStartPosition" type="Marker2D" parent="StartPositions"]
+position = Vector2(500, 500)
+
+[node name="GhostStartPosition" type="Marker2D" parent="StartPositions"]

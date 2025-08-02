@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://82m4fmnms6yk"]
+
+[ext_resource type="Script" uid="uid://dr1bqhevtdgtd" path="res://world/ghosts/ghost.gd" id="1_052b4"]
+
+[node name="Ghost" type="CharacterBody2D"]
+script = ExtResource("1_052b4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
