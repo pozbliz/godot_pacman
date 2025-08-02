@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://eitigiq55372"]
+
+[ext_resource type="Script" uid="uid://pupn2o3umkd7" path="res://main/main.gd" id="1_pjrb6"]
+[ext_resource type="PackedScene" uid="uid://qymt3rlyjx6q" path="res://player/player.tscn" id="2_c651c"]
+[ext_resource type="PackedScene" uid="uid://dh0kc5ysas7xu" path="res://ui/ui.tscn" id="2_xwkvk"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_pjrb6")
+
+[node name="Player" parent="." instance=ExtResource("2_c651c")]
+
+[node name="PlayerStartPosition" type="Marker2D" parent="."]
+position = Vector2(500, 500)
+
+[node name="UI" parent="." instance=ExtResource("2_xwkvk")]
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="AudioGameplay" type="AudioStreamPlayer" parent="Audio"]
+
+[node name="AudioMainMenu" type="AudioStreamPlayer" parent="Audio"]
