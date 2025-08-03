@@ -5,6 +5,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_sl4bs"]
 
 [node name="Coin" type="Area2D"]
+collision_layer = 8
 script = ExtResource("1_sl4bs")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://dr1bqhevtdgtd" path="res://world/ghosts/ghost.gd" id="1_052b4"]
 
 [node name="Ghost" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_052b4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

@@ -30,8 +30,9 @@ func _on_ui_game_started():
 	current_lives = MAX_LIVES
 	score = 0
 	$UI/HUD.update_score(score)
-	$Player.reset_player()
 	$Player.position = $StartPositions/PlayerStartPosition.position
+	$Player.reset_player()
+	$Maze/TileMapLayer.show()
 	play_game_music()
 	$ReadyTimer.start()
 	$UI/HUD.show_message("GET READY")

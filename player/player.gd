@@ -13,6 +13,8 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	velocity = direction * SPEED
+	if velocity > Vector2.ZERO:
+		$AnimatedSprite2D.play("default")
 	
 	var collision = move_and_collide(velocity * delta)
 	if collision:
