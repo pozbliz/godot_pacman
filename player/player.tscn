@@ -33,7 +33,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oul6g"]
-radius = 16.0
+radius = 13.0
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 14
@@ -45,3 +45,10 @@ sprite_frames = SubResource("SpriteFrames_g6k8r")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_oul6g")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+collision_mask = 4
+
+[node name="RayOffset_1" type="RayCast2D" parent="."]
+
+[node name="RayOffset_2" type="RayCast2D" parent="."]

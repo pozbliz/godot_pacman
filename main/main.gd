@@ -4,6 +4,8 @@ extends Node
 @export var coin_scene: PackedScene
 @export var enemy_scene: PackedScene
 
+@onready var player_start = $StartPositions/PlayerStartPosition
+
 
 const MAX_LIVES: int = 3
 const GHOST_COUNT: int = 4
@@ -11,6 +13,7 @@ const GHOST_COUNT: int = 4
 var score: int = 0
 var current_lives: int
 var ghosts: Array = []
+var tile_size = 64
 
 
 func _ready() -> void:
@@ -30,7 +33,7 @@ func _on_ui_game_started():
 	current_lives = MAX_LIVES
 	score = 0
 	$UI/HUD.update_score(score)
-	$Player.position = $StartPositions/PlayerStartPosition.position
+	$Player.position = player_start.position
 	$Player.reset_player()
 	$Maze/TileMapLayer.show()
 	play_game_music()
@@ -88,7 +91,7 @@ func _on_player_hit():
 	else:
 		get_tree().paused = true
 		$Player.reset_player()
-		$Player.position = $StartPositions/PlayerStartPosition.position
+		$Player.position = player_start.position
 		$ReadyTimer.start()
 		$UI/HUD.show_message("GET READY")
 		get_tree().paused = false
