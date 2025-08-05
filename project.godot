@@ -21,8 +21,9 @@ AudioManager="*res://util/audio_manager.gd"
 
 [display]
 
-window/size/viewport_width=960
-window/size/viewport_height=960
+window/size/viewport_width=256
+window/size/viewport_height=240
+window/stretch/mode="canvas_items"
 
 [input]
 
@@ -62,3 +63,7 @@ open_menu={
 2d_physics/layer_2="Enemies"
 2d_physics/layer_3="Wall"
 2d_physics/layer_4="Pickups"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

@@ -31,6 +31,6 @@ wait_time = 2.0
 [node name="StartPositions" type="Node" parent="."]
 
 [node name="PlayerStartPosition" type="Marker2D" parent="StartPositions"]
-position = Vector2(480, 864)
+position = Vector2(120, 216)
 
 [node name="GhostStartPosition" type="Marker2D" parent="StartPositions"]

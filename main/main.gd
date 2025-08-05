@@ -24,7 +24,7 @@ func _ready() -> void:
 	$Player.player_hit.connect(_on_player_hit)
 	$ReadyTimer.timeout.connect(_on_ready_timer_timeout)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 func _on_ui_game_started():

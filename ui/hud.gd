@@ -5,9 +5,6 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	$MarginContainer/MessageTimer.timeout.connect(_on_message_timer_timeout)
 	$MarginContainer/Message.hide()
-
-func _process(delta: float) -> void:
-	pass
 	
 func show_message(text):
 	$MarginContainer/Message.text = text

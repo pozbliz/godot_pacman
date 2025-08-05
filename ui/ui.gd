@@ -23,11 +23,8 @@ func _ready() -> void:
 	
 	$HowToPlayMenu/MarginContainer/VBoxContainer/BackButton.pressed.connect(_on_back_button_pressed)
 	$OptionsMenu/MarginContainer/VBoxContainer/BackButton.pressed.connect(_on_back_button_pressed)
-
-func _process(delta: float) -> void:
-	pass
 	
-func _unhandled_input(event: InputEvent) -> void:
+func _unhandled_input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("open_menu"):
 		match current_state:
 			UIState.GAMEPLAY:

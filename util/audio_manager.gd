@@ -32,7 +32,7 @@ func play(
 		"bus": bus
 	})
 	
-func _process(delta):
+func _process(_delta):
 	if not queue.is_empty() and not available.is_empty():
 		var sound_data = queue.pop_front()
 		var player = available.pop_front()
