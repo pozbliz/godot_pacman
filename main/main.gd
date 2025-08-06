@@ -31,6 +31,7 @@ func _ready() -> void:
 	
 	$BigPellets.hide()
 	$SmallPellets.hide()
+	pellet_tilemap.hide()
 
 func _process(_delta: float) -> void:
 	pass
@@ -78,9 +79,8 @@ func spawn_pellets():
 		var pellet: Pellet = pellet_scene.instantiate()
 		$SmallPellets.add_child(pellet)
 		pellet.small_pellet_picked_up.connect(_on_small_pellet_picked_up)
-		pellet.add_to_group("small_pellets")
+		pellet.add_to_group("small_pellet")
 		pellet.position = world_pos
-		print(pellet.position)
 	$SmallPellets.show()
 	pellet_tilemap.clear()
 	
@@ -98,11 +98,11 @@ func _on_big_pellet_picked_up():
 	
 func _on_small_pellet_picked_up():
 	score += 1
-	$HUD.update_score(score)
+	$UI/HUD.update_score(score)
 	
 func _on_player_hit():
 	current_lives -= 1
-	$HUD.update_lives(current_lives)
+	$UI/HUD.update_lives(current_lives)
 	if current_lives <= 0:
 		game_over()
 	else:
@@ -121,7 +121,7 @@ func game_over():
 	$Player.play_death_animation()
 	await $UI/HUD.show_game_over()
 	$UI.open_main_menu()
-	get_tree().call_group("enemies", "queue_free")
+	get_tree().call_group("enemy", "queue_free")
 	get_tree().call_group("big_pellet", "queue_free")
 	get_tree().call_group("small_pellet", "queue_free")
 	play_main_menu_music()
