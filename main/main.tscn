@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://eitigiq55372"]
+[gd_scene load_steps=13 format=3 uid="uid://eitigiq55372"]
 
 [ext_resource type="Script" uid="uid://pupn2o3umkd7" path="res://main/main.gd" id="1_pjrb6"]
 [ext_resource type="PackedScene" uid="uid://dtnkl6qjkjy5w" path="res://world/pellets/small_pellet.tscn" id="2_3wy1v"]
@@ -8,6 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://cjxrgn434jakl" path="res://world/pellets/big_pellet.tscn" id="6_4dugh"]
 [ext_resource type="Script" uid="uid://7dlwbdnout5k" path="res://world/pellets/pellets.gd" id="6_67ri8"]
 [ext_resource type="PackedScene" uid="uid://cll7kgvs1kooq" path="res://world/maze/maze.tscn" id="6_kfbq2"]
+[ext_resource type="PackedScene" uid="uid://ccf0fi8w2g260" path="res://world/ghosts/blinky.tscn" id="7_fwcvl"]
+[ext_resource type="PackedScene" uid="uid://opgvpttfghns" path="res://world/ghosts/pinky.tscn" id="8_na0o7"]
+[ext_resource type="PackedScene" uid="uid://bejj0550v2pnj" path="res://world/ghosts/inky.tscn" id="9_73k8k"]
+[ext_resource type="PackedScene" uid="uid://y0a7fn73j2vn" path="res://world/ghosts/clyde.tscn" id="10_5xyti"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_pjrb6")
@@ -35,6 +39,16 @@ position = Vector2(232, 231)
 script = ExtResource("6_67ri8")
 
 [node name="SmallPellets" type="Node2D" parent="."]
+
+[node name="Ghosts" type="Node2D" parent="."]
+
+[node name="Blinky" parent="Ghosts" instance=ExtResource("7_fwcvl")]
+
+[node name="Pinky" parent="Ghosts" instance=ExtResource("8_na0o7")]
+
+[node name="Inky" parent="Ghosts" instance=ExtResource("9_73k8k")]
+
+[node name="Clyde" parent="Ghosts" instance=ExtResource("10_5xyti")]
 
 [node name="Player" parent="." instance=ExtResource("2_c651c")]
 

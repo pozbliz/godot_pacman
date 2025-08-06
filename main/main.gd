@@ -6,6 +6,11 @@ extends Node
 
 @onready var player_start = $StartPositions/PlayerStartPosition
 @onready var pellet_tilemap: TileMapLayer = $Maze/PelletMarker
+@onready var blinky: CharacterBody2D = $Ghosts/Blinky
+@onready var pinky: CharacterBody2D = $Ghosts/Pinky
+@onready var inky: CharacterBody2D = $Ghosts/Inky
+@onready var clyde: CharacterBody2D = $Ghosts/Clyde
+
 
 
 const MAX_LIVES: int = 3
@@ -86,13 +91,15 @@ func spawn_pellets():
 	pellet_tilemap.clear()
 	
 func spawn_enemies():
-	pass
-	$Ghosts/Blinky.position = $StartPositions/BlinkyStartPosition.position
-	$Ghosts/Pinky.position = $StartPositions/PinkyStartPosition.position
-	$Ghosts/Inky.position = $StartPositions/InkyStartPosition.position
-	$Ghosts/Clyde.position = $StartPositions/ClydeStartPosition.position
+	blinky.position = $StartPositions/BlinkyStartPosition.position
+	pinky.position = $StartPositions/PinkyStartPosition.position
+	inky.position = $StartPositions/InkyStartPosition.position
+	clyde.position = $StartPositions/ClydeStartPosition.position
 	
-	
+	blinky.set_current_state("CHASING")
+	pinky.set_current_state("IDLE")
+	inky.set_current_state("IDLE")
+	clyde.set_current_state("IDLE")
 	
 func _on_big_pellet_picked_up():
 	pass
