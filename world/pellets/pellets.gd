@@ -16,6 +16,6 @@ func _on_body_entered(body):
 	if body is Player:
 		if is_in_group("big_pellet"):
 			big_pellet_picked_up.emit()
-		else:
+		elif is_in_group("small_pellet"):
 			small_pellet_picked_up.emit()
 		queue_free()

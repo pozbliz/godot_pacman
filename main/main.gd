@@ -28,8 +28,9 @@ func _ready() -> void:
 	$BigPellets/BigPellet2.big_pellet_picked_up.connect(_on_big_pellet_picked_up)
 	$BigPellets/BigPellet3.big_pellet_picked_up.connect(_on_big_pellet_picked_up)
 	$BigPellets/BigPellet4.big_pellet_picked_up.connect(_on_big_pellet_picked_up)
+	
 	$BigPellets.hide()
-	spawn_pellets()
+	$SmallPellets.hide()
 
 func _process(_delta: float) -> void:
 	pass
@@ -37,6 +38,7 @@ func _process(_delta: float) -> void:
 func _on_ui_game_started():
 	get_tree().paused = true
 
+	spawn_pellets()
 	current_lives = MAX_LIVES
 	score = 0
 	$UI/HUD.update_score(score)
@@ -71,11 +73,15 @@ func stop_music():
 	$Audio/AudioGameplay.stop()
 	
 func spawn_pellets():
-	for cell in pellet_tilemap.get_used_cells(0):
+	for cell in pellet_tilemap.get_used_cells():
 		var world_pos = pellet_tilemap.map_to_local(cell)
 		var pellet: Pellet = pellet_scene.instantiate()
 		$SmallPellets.add_child(pellet)
-		pellet.pellet_picked_up.connect(_on_small_pellet_picked_up)
+		pellet.small_pellet_picked_up.connect(_on_small_pellet_picked_up)
+		pellet.add_to_group("small_pellets")
+		pellet.position = world_pos
+		print(pellet.position)
+	$SmallPellets.show()
 	pellet_tilemap.clear()
 	
 func spawn_enemies():
