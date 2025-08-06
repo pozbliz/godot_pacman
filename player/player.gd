@@ -6,6 +6,7 @@ class_name Player
 const SPEED = 50.0
 
 var direction: Vector2 = Vector2.ZERO
+var screen_size
 
 
 signal player_hit
@@ -13,6 +14,7 @@ signal player_hit
 
 func _ready() -> void:
 	hide()
+	screen_size = get_viewport_rect().size
 
 func _physics_process(delta: float) -> void:
 	velocity = direction * SPEED
@@ -20,6 +22,7 @@ func _physics_process(delta: float) -> void:
 		$AnimatedSprite2D.play("default")
 	$AnimatedSprite2D.rotation = direction.angle()
 	move_and_slide()
+	check_screen_warp()
 	
 func _unhandled_input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("move_left"):
@@ -30,6 +33,12 @@ func _unhandled_input(_event: InputEvent) -> void:
 		direction = Vector2.UP
 	if Input.is_action_just_pressed("move_down"):
 		direction = Vector2.DOWN
+		
+func check_screen_warp():
+	if position.x > screen_size.x:
+		position.x = 0
+	if position.x < 0:
+		position.x = screen_size.x
 	
 func reset_player():
 	show()

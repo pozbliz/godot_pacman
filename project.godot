@@ -21,7 +21,7 @@ AudioManager="*res://util/audio_manager.gd"
 
 [display]
 
-window/size/viewport_width=256
+window/size/viewport_width=240
 window/size/viewport_height=240
 window/stretch/mode="canvas_items"
 
