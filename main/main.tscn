@@ -1,22 +1,45 @@
-[gd_scene load_steps=7 format=3 uid="uid://eitigiq55372"]
+[gd_scene load_steps=9 format=3 uid="uid://eitigiq55372"]
 
 [ext_resource type="Script" uid="uid://pupn2o3umkd7" path="res://main/main.gd" id="1_pjrb6"]
-[ext_resource type="PackedScene" uid="uid://dtnkl6qjkjy5w" path="res://world/coins/coin.tscn" id="2_3wy1v"]
+[ext_resource type="PackedScene" uid="uid://dtnkl6qjkjy5w" path="res://world/pellets/small_pellet.tscn" id="2_3wy1v"]
 [ext_resource type="PackedScene" uid="uid://qymt3rlyjx6q" path="res://player/player.tscn" id="2_c651c"]
 [ext_resource type="PackedScene" uid="uid://dh0kc5ysas7xu" path="res://ui/ui.tscn" id="2_xwkvk"]
 [ext_resource type="PackedScene" uid="uid://82m4fmnms6yk" path="res://world/ghosts/ghost.tscn" id="3_3wy1v"]
+[ext_resource type="PackedScene" uid="uid://cjxrgn434jakl" path="res://world/pellets/big_pellet.tscn" id="6_4dugh"]
+[ext_resource type="Script" uid="uid://7dlwbdnout5k" path="res://world/pellets/pellets.gd" id="6_67ri8"]
 [ext_resource type="PackedScene" uid="uid://cll7kgvs1kooq" path="res://world/maze/maze.tscn" id="6_kfbq2"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_pjrb6")
-coin_scene = ExtResource("2_3wy1v")
+pellet_scene = ExtResource("2_3wy1v")
 enemy_scene = ExtResource("3_3wy1v")
 
 [node name="Maze" parent="." instance=ExtResource("6_kfbq2")]
 
+[node name="BigPellets" type="Node2D" parent="."]
+
+[node name="BigPellet" parent="BigPellets" groups=["big_pellet"] instance=ExtResource("6_4dugh")]
+position = Vector2(9, 9)
+script = ExtResource("6_67ri8")
+
+[node name="BigPellet2" parent="BigPellets" groups=["big_pellet"] instance=ExtResource("6_4dugh")]
+position = Vector2(232, 70)
+script = ExtResource("6_67ri8")
+
+[node name="BigPellet3" parent="BigPellets" groups=["big_pellet"] instance=ExtResource("6_4dugh")]
+position = Vector2(9, 169)
+script = ExtResource("6_67ri8")
+
+[node name="BigPellet4" parent="BigPellets" groups=["big_pellet"] instance=ExtResource("6_4dugh")]
+position = Vector2(232, 231)
+script = ExtResource("6_67ri8")
+
+[node name="SmallPellets" type="Node2D" parent="."]
+
 [node name="Player" parent="." instance=ExtResource("2_c651c")]
 
 [node name="UI" parent="." instance=ExtResource("2_xwkvk")]
+visible = false
 
 [node name="Audio" type="Node" parent="."]
 

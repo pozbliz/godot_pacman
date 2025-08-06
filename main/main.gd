@@ -1,10 +1,11 @@
 extends Node
 
 
-@export var coin_scene: PackedScene
+@export var pellet_scene: PackedScene
 @export var enemy_scene: PackedScene
 
 @onready var player_start = $StartPositions/PlayerStartPosition
+@onready var pellet_tilemap: TileMapLayer = $Maze/PelletMarker
 
 
 const MAX_LIVES: int = 3
@@ -23,6 +24,12 @@ func _ready() -> void:
 	
 	$Player.player_hit.connect(_on_player_hit)
 	$ReadyTimer.timeout.connect(_on_ready_timer_timeout)
+	$BigPellets/BigPellet.big_pellet_picked_up.connect(_on_big_pellet_picked_up)
+	$BigPellets/BigPellet2.big_pellet_picked_up.connect(_on_big_pellet_picked_up)
+	$BigPellets/BigPellet3.big_pellet_picked_up.connect(_on_big_pellet_picked_up)
+	$BigPellets/BigPellet4.big_pellet_picked_up.connect(_on_big_pellet_picked_up)
+	$BigPellets.hide()
+	spawn_pellets()
 
 func _process(_delta: float) -> void:
 	pass
@@ -36,6 +43,7 @@ func _on_ui_game_started():
 	$Player.position = player_start.position
 	$Player.reset_player()
 	$Maze/TileMapLayer.show()
+	$BigPellets.show()
 	play_game_music()
 	$ReadyTimer.start()
 	$UI/HUD.show_message("GET READY")
@@ -62,14 +70,14 @@ func stop_music():
 	$Audio/AudioMainMenu.stop()
 	$Audio/AudioGameplay.stop()
 	
-func spawn_coins():
-	pass
+func spawn_pellets():
+	for cell in pellet_tilemap.get_used_cells(0):
+		var world_pos = pellet_tilemap.map_to_local(cell)
+		var pellet: Pellet = pellet_scene.instantiate()
+		$SmallPellets.add_child(pellet)
+		pellet.pellet_picked_up.connect(_on_small_pellet_picked_up)
+	pellet_tilemap.clear()
 	
-	# for tile in grid:
-		# var coin: Coin = coin_scene.instantiate()
-		# add_child(coin)
-		# coin.coin_picked_up.connect(_on_coin_picked_up)
-		
 func spawn_enemies():
 	pass
 	
@@ -79,7 +87,10 @@ func spawn_enemies():
 	
 	
 	
-func _on_coin_picked_up():
+func _on_big_pellet_picked_up():
+	pass
+	
+func _on_small_pellet_picked_up():
 	score += 1
 	$HUD.update_score(score)
 	
@@ -105,5 +116,7 @@ func game_over():
 	await $UI/HUD.show_game_over()
 	$UI.open_main_menu()
 	get_tree().call_group("enemies", "queue_free")
+	get_tree().call_group("big_pellet", "queue_free")
+	get_tree().call_group("small_pellet", "queue_free")
 	play_main_menu_music()
 	

@@ -15,26 +15,25 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_ks8t7")
-metadata/_edit_group_ = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HUD"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 23.0
-grow_horizontal = 2
-theme_override_constants/separation = 20
+layout_mode = 0
+offset_left = 95.0
+offset_top = 145.0
+offset_right = 169.0
+offset_bottom = 168.0
+theme_override_constants/separation = 0
 
 [node name="ScoreText" type="Label" parent="HUD/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 10
 text = "Score:"
 
 [node name="ScoreLabel" type="Label" parent="HUD/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 2
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 10
 text = "0"
 
 [node name="MarginContainer" type="MarginContainer" parent="HUD"]
@@ -48,7 +47,7 @@ grow_vertical = 2
 [node name="Message" type="Label" parent="HUD/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 15
 text = "Test"
 
 [node name="MessageTimer" type="Timer" parent="HUD/MarginContainer"]
@@ -83,22 +82,22 @@ layout_mode = 2
 
 [node name="StartGameButton" type="Button" parent="MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 10
 text = "Start Game"
 
 [node name="HowToPlayButton" type="Button" parent="MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 10
 text = "How To Play"
 
 [node name="OptionsButton" type="Button" parent="MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 10
 text = "Options"
 
 [node name="ExitGameButton" type="Button" parent="MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 10
 text = "Exit Game"
 
 [node name="PauseMenu" type="Control" parent="."]
@@ -130,22 +129,22 @@ layout_mode = 2
 
 [node name="ResumeGameButton" type="Button" parent="PauseMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 10
 text = "Resume Game"
 
 [node name="NewGameButton" type="Button" parent="PauseMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 10
 text = "New Game"
 
 [node name="OptionsButton" type="Button" parent="PauseMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 10
 text = "Options"
 
 [node name="ExitGameButton" type="Button" parent="PauseMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 10
 text = "Exit Game"
 
 [node name="OptionsMenu" type="Control" parent="."]
@@ -177,12 +176,12 @@ layout_mode = 2
 
 [node name="PowerUpsEnabled" type="CheckBox" parent="OptionsMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 10
 text = "Enable Powerups"
 
 [node name="BackButton" type="Button" parent="OptionsMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 10
 text = "Back To Menu"
 
 [node name="HowToPlayMenu" type="Control" parent="."]
@@ -214,6 +213,7 @@ layout_mode = 2
 
 [node name="HowToPlayLabel" type="Label" parent="HowToPlayMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 10
 text = "W/Up Arrow - Move Up
 S/Down Arrow - Move Down
 A/Left Arrow - Move Left
@@ -222,5 +222,5 @@ horizontal_alignment = 1
 
 [node name="BackButton" type="Button" parent="HowToPlayMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 10
 text = "Back To Main Menu"
