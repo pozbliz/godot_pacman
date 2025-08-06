@@ -6,15 +6,17 @@ class_name Player
 const SPEED = 50.0
 
 var direction: Vector2 = Vector2.ZERO
-var screen_size
+var screen_size: Vector2
 
 
 signal player_hit
 
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_PAUSABLE
 	hide()
 	screen_size = get_viewport_rect().size
+	add_to_group("player")
 
 func _physics_process(delta: float) -> void:
 	velocity = direction * SPEED

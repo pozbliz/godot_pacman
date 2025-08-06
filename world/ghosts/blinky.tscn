@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://ccf0fi8w2g260"]
+
+[ext_resource type="Script" uid="uid://blqfloqs882t" path="res://world/ghosts/blinky.gd" id="1_w4yt3"]
+
+[node name="Blinky" type="CharacterBody2D"]
+script = ExtResource("1_w4yt3")
+metadata/_custom_type_script = "uid://dr1bqhevtdgtd"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -29,6 +29,7 @@ func _ready() -> void:
 	$BigPellets/BigPellet3.big_pellet_picked_up.connect(_on_big_pellet_picked_up)
 	$BigPellets/BigPellet4.big_pellet_picked_up.connect(_on_big_pellet_picked_up)
 	
+	$Maze.hide()
 	$BigPellets.hide()
 	$SmallPellets.hide()
 	pellet_tilemap.hide()
@@ -45,7 +46,7 @@ func _on_ui_game_started():
 	$UI/HUD.update_score(score)
 	$Player.position = player_start.position
 	$Player.reset_player()
-	$Maze/TileMapLayer.show()
+	$Maze.show()
 	$BigPellets.show()
 	play_game_music()
 	$ReadyTimer.start()
@@ -86,15 +87,16 @@ func spawn_pellets():
 	
 func spawn_enemies():
 	pass
-	
-	var first_ghost: Ghost = enemy_scene.instantiate()
-	add_child(first_ghost)
-	first_ghost.position = $StartPositions/GhostStartPosition.position
+	$Ghosts/Blinky.position = $StartPositions/BlinkyStartPosition.position
+	$Ghosts/Pinky.position = $StartPositions/PinkyStartPosition.position
+	$Ghosts/Inky.position = $StartPositions/InkyStartPosition.position
+	$Ghosts/Clyde.position = $StartPositions/ClydeStartPosition.position
 	
 	
 	
 func _on_big_pellet_picked_up():
 	pass
+	#$Ghost.scatter()
 	
 func _on_small_pellet_picked_up():
 	score += 1

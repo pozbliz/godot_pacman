@@ -39,6 +39,7 @@ script = ExtResource("6_67ri8")
 [node name="Player" parent="." instance=ExtResource("2_c651c")]
 
 [node name="UI" parent="." instance=ExtResource("2_xwkvk")]
+visible = false
 
 [node name="Audio" type="Node" parent="."]
 
@@ -55,4 +56,14 @@ wait_time = 2.0
 [node name="PlayerStartPosition" type="Marker2D" parent="StartPositions"]
 position = Vector2(120, 216)
 
-[node name="GhostStartPosition" type="Marker2D" parent="StartPositions"]
+[node name="BlinkyStartPosition" type="Marker2D" parent="StartPositions"]
+position = Vector2(120, 104)
+
+[node name="PinkyStartPosition" type="Marker2D" parent="StartPositions"]
+position = Vector2(120, 120)
+
+[node name="InkyStartPosition" type="Marker2D" parent="StartPositions"]
+position = Vector2(104, 120)
+
+[node name="ClydeStartPosition" type="Marker2D" parent="StartPositions"]
+position = Vector2(136, 120)

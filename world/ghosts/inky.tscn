@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bejj0550v2pnj"]
+
+[ext_resource type="Script" uid="uid://cv471dfcthx0o" path="res://world/ghosts/inky.gd" id="1_su37u"]
+
+[node name="Inky" type="CharacterBody2D"]
+script = ExtResource("1_su37u")
+metadata/_custom_type_script = "uid://dr1bqhevtdgtd"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
