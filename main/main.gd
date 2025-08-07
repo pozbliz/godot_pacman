@@ -46,6 +46,7 @@ func _on_ui_game_started():
 	get_tree().paused = true
 
 	spawn_pellets()
+	spawn_enemies()
 	current_lives = MAX_LIVES
 	score = 0
 	$UI/HUD.update_score(score)
@@ -100,6 +101,11 @@ func spawn_enemies():
 	pinky.set_current_state("IDLE")
 	inky.set_current_state("IDLE")
 	clyde.set_current_state("IDLE")
+	
+	blinky.show()
+	pinky.show()
+	inky.show()
+	clyde.show()
 	
 func _on_big_pellet_picked_up():
 	pass

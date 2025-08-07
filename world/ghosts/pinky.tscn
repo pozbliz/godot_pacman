@@ -1,11 +1,42 @@
-[gd_scene load_steps=2 format=3 uid="uid://opgvpttfghns"]
+[gd_scene load_steps=7 format=3 uid="uid://opgvpttfghns"]
 
 [ext_resource type="Script" uid="uid://duq2npdfn2r5b" path="res://world/ghosts/pinky.gd" id="1_k5d25"]
+[ext_resource type="Texture2D" uid="uid://w6afg6teb3cs" path="res://assets/pinky.png" id="2_llhr6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1o40a"]
+atlas = ExtResource("2_llhr6")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v7jyv"]
+atlas = ExtResource("2_llhr6")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pirlo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1o40a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v7jyv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cqk4i"]
+radius = 5.0
 
 [node name="Pinky" type="CharacterBody2D"]
 script = ExtResource("1_k5d25")
 metadata/_custom_type_script = "uid://dr1bqhevtdgtd"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.7, 0.7)
+sprite_frames = SubResource("SpriteFrames_pirlo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_cqk4i")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
