@@ -98,7 +98,7 @@ func spawn_enemies():
 	clyde.position = $StartPositions/ClydeStartPosition.position
 	
 	blinky.set_current_state("CHASING")
-	pinky.set_current_state("IDLE")
+	pinky.set_current_state("CHASING")
 	inky.set_current_state("IDLE")
 	clyde.set_current_state("IDLE")
 	
@@ -107,13 +107,23 @@ func spawn_enemies():
 	inky.show()
 	clyde.show()
 	
+func activate_ghost(ghost: Ghost) -> void:
+	ghost.set_current_state("CHASING")
+	
+func scatter():
+	pass
+	
 func _on_big_pellet_picked_up():
 	pass
-	#$Ghost.scatter()
+	#$Ghost.frighten()
 	
 func _on_small_pellet_picked_up():
 	score += 1
 	$UI/HUD.update_score(score)
+	if score >= 30:
+		activate_ghost(inky)
+	if score >= 90:
+		activate_ghost(clyde)
 	
 func _on_player_hit():
 	current_lives -= 1

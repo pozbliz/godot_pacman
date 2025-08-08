@@ -2,11 +2,13 @@ extends CharacterBody2D
 class_name Ghost
 
 
-enum BehaviorMode { IDLE, CHASING, SCATTERING }
+enum BehaviorMode { IDLE, CHASING, SCATTERING, FRIGHTENED }
 
 @onready var nav_agent := $NavigationAgent2D
 
-const SPEED = 40.0
+const SPEED = 37.5
+const TILE_SIZE: int = 16
+
 
 var screen_size: Vector2
 var direction: Vector2 = Vector2.ZERO

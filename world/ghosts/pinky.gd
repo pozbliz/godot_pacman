@@ -1,13 +1,16 @@
 extends Ghost
 
+
+const TILES_AHEAD: int = 4
+const DOT_LIMIT: int = 30
+
+
 func _ready() -> void:
 	super._ready()
 
-func _physics_process(delta: float) -> void:
-	super._physics_process(delta)
-	custom_ai_behavior(delta)
-
-func custom_ai_behavior(delta: float) -> void:
+func update_chase_target() -> void:
 	var player = get_tree().get_first_node_in_group("player")
 	if player:
-		direction = (player.position - position).normalized()
+		var ahead_offset = player.direction.normalized() * TILE_SIZE * TILES_AHEAD
+		var target_pos = player.global_position + ahead_offset
+		nav_agent.set_target_position(target_pos)
