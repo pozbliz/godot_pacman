@@ -139,9 +139,12 @@ func _on_small_pellet_picked_up():
 	if global_dot_counter_active == true:
 		global_dot_counter += 1
 		if global_dot_counter >= 4:
-			activate_ghost(inky)
+			activate_ghost(pinky)
 			global_dot_counter = 0
 		if global_dot_counter >= 11:
+			activate_ghost(inky)
+			global_dot_counter = 0
+		if global_dot_counter >= 20:
 			activate_ghost(clyde)
 			global_dot_counter = 0
 	
