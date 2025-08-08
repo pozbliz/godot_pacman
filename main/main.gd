@@ -18,6 +18,9 @@ const MAX_LIVES: int = 3
 var score: int = 0
 var current_lives: int
 var ghosts: Array = []
+var dot_counter: int = 0
+var global_dot_counter_active: bool = false
+var global_dot_counter: int = 0
 
 
 func _ready() -> void:
@@ -94,7 +97,7 @@ func spawn_enemies():
 	reset_ghost_position()
 	
 	blinky.set_current_state("CHASING")
-	pinky.set_current_state("CHASING")
+	pinky.set_current_state("IDLE")
 	inky.set_current_state("IDLE")
 	clyde.set_current_state("IDLE")
 	
@@ -110,7 +113,8 @@ func reset_ghost_position():
 	clyde.position = $StartPositions/ClydeStartPosition.position
 	
 func activate_ghost(ghost: Ghost) -> void:
-	ghost.set_current_state("CHASING")
+	if ghost.get_current_state() == Ghost.BehaviorMode.IDLE:
+		ghost.set_current_state("CHASING")
 	
 func scatter():
 	pass
@@ -122,10 +126,24 @@ func _on_big_pellet_picked_up():
 func _on_small_pellet_picked_up():
 	score += 1
 	$UI/HUD.update_score(score)
-	if score >= 30:
+	dot_counter += 1
+	if dot_counter >= 0:
+		activate_ghost(pinky)
+		dot_counter = 0
+	if dot_counter >= 19:
 		activate_ghost(inky)
-	if score >= 90:
+		dot_counter = 0
+	if dot_counter >= 38:
 		activate_ghost(clyde)
+		dot_counter = 0
+	if global_dot_counter_active == true:
+		global_dot_counter += 1
+		if global_dot_counter >= 4:
+			activate_ghost(inky)
+			global_dot_counter = 0
+		if global_dot_counter >= 11:
+			activate_ghost(clyde)
+			global_dot_counter = 0
 	
 func _on_player_hit():
 	current_lives -= 1
@@ -138,7 +156,8 @@ func _on_player_hit():
 		get_tree().paused = true
 		$Player.reset_player()
 		$Player.position = player_start.position
-		reset_ghost_position
+		reset_ghost_position()
+		global_dot_counter 
 		$ReadyTimer.start()
 		$UI/HUD.show_message("GET READY")
 	
