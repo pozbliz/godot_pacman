@@ -127,16 +127,17 @@ func _on_small_pellet_picked_up():
 	score += 1
 	$UI/HUD.update_score(score)
 	dot_counter += 1
-	if dot_counter >= 0:
-		activate_ghost(pinky)
-		dot_counter = 0
-	if dot_counter >= 19:
-		activate_ghost(inky)
-		dot_counter = 0
-	if dot_counter >= 38:
-		activate_ghost(clyde)
-		dot_counter = 0
-	if global_dot_counter_active == true:
+	if not global_dot_counter_active:
+		if dot_counter >= 0:
+			activate_ghost(pinky)
+			dot_counter = 0
+		if dot_counter >= 19:
+			activate_ghost(inky)
+			dot_counter = 0
+		if dot_counter >= 38:
+			activate_ghost(clyde)
+			dot_counter = 0
+	else:
 		global_dot_counter += 1
 		if global_dot_counter >= 4:
 			activate_ghost(pinky)
@@ -147,6 +148,7 @@ func _on_small_pellet_picked_up():
 		if global_dot_counter >= 20:
 			activate_ghost(clyde)
 			global_dot_counter = 0
+			global_dot_counter_active = false
 	
 func _on_player_hit():
 	current_lives -= 1
@@ -160,7 +162,7 @@ func _on_player_hit():
 		$Player.reset_player()
 		$Player.position = player_start.position
 		reset_ghost_position()
-		global_dot_counter 
+		global_dot_counter_active = true
 		$ReadyTimer.start()
 		$UI/HUD.show_message("GET READY")
 	

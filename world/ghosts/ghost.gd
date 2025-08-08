@@ -22,7 +22,7 @@ func _ready() -> void:
 	screen_size = get_viewport_rect().size
 	add_to_group("enemy")
 	nav_agent.target_desired_distance = 1.0
-	nav_agent.path_desired_distance = 5.0
+	nav_agent.path_desired_distance = 3.0
 
 func _physics_process(delta: float) -> void:
 	match current_state:
