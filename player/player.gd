@@ -17,6 +17,7 @@ func _ready() -> void:
 	hide()
 	screen_size = get_viewport_rect().size
 	add_to_group("player")
+	$Hitbox.body_entered.connect(_on_hitbox_body_entered)
 
 func _physics_process(delta: float) -> void:
 	velocity = direction * SPEED
@@ -27,6 +28,8 @@ func _physics_process(delta: float) -> void:
 	check_screen_warp()
 	
 func _unhandled_input(_event: InputEvent) -> void:
+	if get_tree().paused:
+		return
 	if Input.is_action_just_pressed("move_left"):
 		direction = Vector2.LEFT
 	if Input.is_action_just_pressed("move_right"):
@@ -41,9 +44,13 @@ func check_screen_warp():
 		position.x = 0
 	if position.x < 0:
 		position.x = screen_size.x
+		
+func _on_hitbox_body_entered(body: Node):
+	if body.is_in_group("enemy"):
+		emit_signal("player_hit")
 	
 func reset_player():
 	show()
 	velocity = Vector2.ZERO
 	direction = Vector2.ZERO
-	$CollisionShape2D.set_deferred("disabled", false)
+	$WallsHitbox.set_deferred("disabled", false)

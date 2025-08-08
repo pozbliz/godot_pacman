@@ -14,15 +14,14 @@ extends Node
 
 
 const MAX_LIVES: int = 3
-const GHOST_COUNT: int = 4
 
 var score: int = 0
 var current_lives: int
 var ghosts: Array = []
-var tile_size = 64
 
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_PAUSABLE
 	$UI.game_started.connect(_on_ui_game_started)
 	$UI.open_main_menu()
 	$Audio/AudioMainMenu.play()
@@ -92,10 +91,7 @@ func spawn_pellets():
 	pellet_tilemap.clear()
 	
 func spawn_enemies():
-	blinky.position = $StartPositions/BlinkyStartPosition.position
-	pinky.position = $StartPositions/PinkyStartPosition.position
-	inky.position = $StartPositions/InkyStartPosition.position
-	clyde.position = $StartPositions/ClydeStartPosition.position
+	reset_ghost_position()
 	
 	blinky.set_current_state("CHASING")
 	pinky.set_current_state("CHASING")
@@ -106,6 +102,12 @@ func spawn_enemies():
 	pinky.show()
 	inky.show()
 	clyde.show()
+	
+func reset_ghost_position():
+	blinky.position = $StartPositions/BlinkyStartPosition.position
+	pinky.position = $StartPositions/PinkyStartPosition.position
+	inky.position = $StartPositions/InkyStartPosition.position
+	clyde.position = $StartPositions/ClydeStartPosition.position
 	
 func activate_ghost(ghost: Ghost) -> void:
 	ghost.set_current_state("CHASING")
@@ -128,15 +130,17 @@ func _on_small_pellet_picked_up():
 func _on_player_hit():
 	current_lives -= 1
 	$UI/HUD.update_lives(current_lives)
+	# TODO: add lives counter
+	print(current_lives)
 	if current_lives <= 0:
 		game_over()
 	else:
 		get_tree().paused = true
 		$Player.reset_player()
 		$Player.position = player_start.position
+		reset_ghost_position
 		$ReadyTimer.start()
 		$UI/HUD.show_message("GET READY")
-		get_tree().paused = false
 	
 func game_over():
 	$Player.set_process(false)

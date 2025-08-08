@@ -47,8 +47,10 @@ script = ExtResource("6_67ri8")
 [node name="Pinky" parent="Ghosts" instance=ExtResource("8_na0o7")]
 
 [node name="Inky" parent="Ghosts" instance=ExtResource("9_73k8k")]
+collision_mask = 5
 
 [node name="Clyde" parent="Ghosts" instance=ExtResource("10_5xyti")]
+collision_mask = 5
 
 [node name="Player" parent="." instance=ExtResource("2_c651c")]
 
@@ -63,6 +65,7 @@ script = ExtResource("6_67ri8")
 [node name="ReadyTimer" type="Timer" parent="."]
 process_mode = 3
 wait_time = 2.0
+one_shot = true
 
 [node name="StartPositions" type="Node" parent="."]
 

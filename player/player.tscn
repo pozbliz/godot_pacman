@@ -51,5 +51,12 @@ texture_filter = 1
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_g6k8r")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="WallsHitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_oul6g")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 14
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_oul6g")

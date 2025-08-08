@@ -17,6 +17,7 @@ var current_state: BehaviorMode = BehaviorMode.IDLE
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_PAUSABLE
+	nav_agent.process_mode = Node.PROCESS_MODE_PAUSABLE
 	hide()
 	screen_size = get_viewport_rect().size
 	add_to_group("enemy")
