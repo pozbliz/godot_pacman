@@ -13,6 +13,10 @@ const TILE_SIZE: int = 16
 var screen_size: Vector2
 var direction: Vector2 = Vector2.ZERO
 var current_state: BehaviorMode = BehaviorMode.IDLE
+var start_position: Vector2
+
+signal enter_frightened
+signal exit_frightened
 
 
 func _ready() -> void:
@@ -78,10 +82,13 @@ func scatter():
 		
 func become_frightened():
 	if current_state == BehaviorMode.CHASING:
+		enter_frightened.emit()
 		set_current_state("FRIGHTENED")
 		$AnimatedSprite2D.play("frightened")
 		var frightened_timer = get_tree().create_timer(7.0)
 		frightened_timer.timeout.connect(_on_frightened_timer_timeout)
+		await frightened_timer.timeout
+		exit_frightened.emit()
 	
 func _on_frightened_timer_timeout():
 	set_current_state("CHASING")
@@ -100,3 +107,6 @@ func set_current_state(state: String) -> void:
 			current_state = BehaviorMode.SCATTERING
 		"FRIGHTENED":
 			current_state = BehaviorMode.FRIGHTENED
+			
+func return_to_start():
+	position = start_position

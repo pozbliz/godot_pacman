@@ -63,3 +63,6 @@ animation = &"frightened"
 shape = SubResource("CircleShape2D_xjg5d")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="ClydeStartPosition" type="Marker2D" parent="."]
+position = Vector2(136, 120)

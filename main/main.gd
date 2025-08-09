@@ -21,6 +21,7 @@ var ghosts: Array = []
 var dot_counter: int = 0
 var global_dot_counter_active: bool = false
 var global_dot_counter: int = 0
+var ghosts_frightened: bool = false
 
 
 func _ready() -> void:
@@ -35,6 +36,15 @@ func _ready() -> void:
 	$BigPellets/BigPellet2.big_pellet_picked_up.connect(_on_big_pellet_picked_up)
 	$BigPellets/BigPellet3.big_pellet_picked_up.connect(_on_big_pellet_picked_up)
 	$BigPellets/BigPellet4.big_pellet_picked_up.connect(_on_big_pellet_picked_up)
+	
+	blinky.enter_frightened.connect(_on_enter_frightened)
+	blinky.exit_frightened.connect(_on_exit_frightened)
+	pinky.enter_frightened.connect(_on_enter_frightened)
+	pinky.exit_frightened.connect(_on_exit_frightened)
+	inky.enter_frightened.connect(_on_enter_frightened)
+	inky.exit_frightened.connect(_on_exit_frightened)
+	clyde.enter_frightened.connect(_on_enter_frightened)
+	clyde.exit_frightened.connect(_on_exit_frightened)
 	
 	$Maze.hide()
 	$BigPellets.hide()
@@ -51,6 +61,7 @@ func _on_ui_game_started():
 	spawn_enemies()
 	current_lives = MAX_LIVES
 	score = 0
+	ghosts_frightened = false
 	$UI/HUD.update_score(score)
 	$Player.position = player_start.position
 	$Player.reset_player()
@@ -107,10 +118,10 @@ func spawn_enemies():
 	clyde.show()
 	
 func reset_ghost_position():
-	blinky.position = $StartPositions/BlinkyStartPosition.position
-	pinky.position = $StartPositions/PinkyStartPosition.position
-	inky.position = $StartPositions/InkyStartPosition.position
-	clyde.position = $StartPositions/ClydeStartPosition.position
+	blinky.return_to_start()
+	pinky.return_to_start()
+	inky.return_to_start()
+	clyde.return_to_start()
 	
 func activate_ghost(ghost: Ghost) -> void:
 	if ghost.get_current_state() == Ghost.BehaviorMode.IDLE:
@@ -154,22 +165,32 @@ func _on_small_pellet_picked_up():
 			activate_ghost(clyde)
 			global_dot_counter = 0
 			global_dot_counter_active = false
+			
+func _on_enter_frightened():
+	ghosts_frightened = true
 	
-func _on_player_hit():
-	current_lives -= 1
-	$UI/HUD.update_lives(current_lives)
-	# TODO: add lives counter
-	print(current_lives)
-	if current_lives <= 0:
-		game_over()
+func _on_exit_frightened():
+	ghosts_frightened = false
+	
+func _on_player_hit(body):
+	if ghosts_frightened == false:
+		current_lives -= 1
+		$UI/HUD.update_lives(current_lives)
+		# TODO: add lives counter
+		if current_lives <= 0:
+			game_over()
+		else:
+			get_tree().paused = true
+			$Player.reset_player()
+			$Player.position = player_start.position
+			reset_ghost_position()
+			global_dot_counter_active = true
+			$ReadyTimer.start()
+			$UI/HUD.show_message("GET READY")
 	else:
-		get_tree().paused = true
-		$Player.reset_player()
-		$Player.position = player_start.position
-		reset_ghost_position()
-		global_dot_counter_active = true
-		$ReadyTimer.start()
-		$UI/HUD.show_message("GET READY")
+		score += 200
+		$UI/HUD.update_score(score)
+		body.return_to_start()
 	
 func game_over():
 	$Player.set_process(false)

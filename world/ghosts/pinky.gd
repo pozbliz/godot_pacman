@@ -1,4 +1,5 @@
 extends Ghost
+class_name Pinky
 
 
 const TILES_AHEAD: int = 4
@@ -7,6 +8,7 @@ const DOT_LIMIT: int = 30
 
 func _ready() -> void:
 	super._ready()
+	start_position = $PinkyStartPosition.position
 
 func update_chase_target() -> void:
 	var player = get_tree().get_first_node_in_group("player")

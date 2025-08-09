@@ -47,7 +47,7 @@ func check_screen_warp():
 		
 func _on_hitbox_body_entered(body: Node):
 	if body.is_in_group("enemy"):
-		emit_signal("player_hit")
+		player_hit.emit(body)
 	
 func reset_player():
 	show()

@@ -63,3 +63,6 @@ animation = &"frightened"
 shape = SubResource("CircleShape2D_cqk4i")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="PinkyStartPosition" type="Marker2D" parent="."]
+position = Vector2(120, 120)

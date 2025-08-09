@@ -1,10 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://eitigiq55372"]
+[gd_scene load_steps=14 format=3 uid="uid://eitigiq55372"]
 
 [ext_resource type="Script" uid="uid://pupn2o3umkd7" path="res://main/main.gd" id="1_pjrb6"]
 [ext_resource type="PackedScene" uid="uid://dtnkl6qjkjy5w" path="res://world/pellets/small_pellet.tscn" id="2_3wy1v"]
 [ext_resource type="PackedScene" uid="uid://qymt3rlyjx6q" path="res://player/player.tscn" id="2_c651c"]
 [ext_resource type="PackedScene" uid="uid://dh0kc5ysas7xu" path="res://ui/ui.tscn" id="2_xwkvk"]
-[ext_resource type="PackedScene" uid="uid://82m4fmnms6yk" path="res://world/ghosts/ghost.tscn" id="3_3wy1v"]
+[ext_resource type="Script" uid="uid://dr1bqhevtdgtd" path="res://world/ghosts/ghost.gd" id="3_fwcvl"]
 [ext_resource type="PackedScene" uid="uid://cjxrgn434jakl" path="res://world/pellets/big_pellet.tscn" id="6_4dugh"]
 [ext_resource type="Script" uid="uid://7dlwbdnout5k" path="res://world/pellets/pellets.gd" id="6_67ri8"]
 [ext_resource type="PackedScene" uid="uid://cll7kgvs1kooq" path="res://world/maze/maze.tscn" id="6_kfbq2"]
@@ -13,10 +13,23 @@
 [ext_resource type="PackedScene" uid="uid://bejj0550v2pnj" path="res://world/ghosts/inky.tscn" id="9_73k8k"]
 [ext_resource type="PackedScene" uid="uid://y0a7fn73j2vn" path="res://world/ghosts/clyde.tscn" id="10_5xyti"]
 
+[sub_resource type="PackedScene" id="PackedScene_na0o7"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"names": PackedStringArray("Ghost", "collision_layer", "collision_mask", "script", "CharacterBody2D", "AnimatedSprite2D", "CollisionShape2D", "NavigationAgent2D", "path_postprocessing"),
+"node_count": 4,
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 4, 0, -1, 3, 1, 0, 2, 1, 3, 2, 0, 0, 0, 5, 5, -1, 0, 0, 0, 0, 6, 6, -1, 0, 0, 0, 0, 7, 7, -1, 1, 8, 3, 0),
+"variants": [2, 20, ExtResource("3_fwcvl"), 1],
+"version": 3
+}
+
 [node name="Main" type="Node"]
 script = ExtResource("1_pjrb6")
 pellet_scene = ExtResource("2_3wy1v")
-enemy_scene = ExtResource("3_3wy1v")
+enemy_scene = SubResource("PackedScene_na0o7")
 
 [node name="Maze" parent="." instance=ExtResource("6_kfbq2")]
 
@@ -71,15 +84,3 @@ one_shot = true
 
 [node name="PlayerStartPosition" type="Marker2D" parent="StartPositions"]
 position = Vector2(120, 216)
-
-[node name="BlinkyStartPosition" type="Marker2D" parent="StartPositions"]
-position = Vector2(120, 104)
-
-[node name="PinkyStartPosition" type="Marker2D" parent="StartPositions"]
-position = Vector2(120, 120)
-
-[node name="InkyStartPosition" type="Marker2D" parent="StartPositions"]
-position = Vector2(104, 120)
-
-[node name="ClydeStartPosition" type="Marker2D" parent="StartPositions"]
-position = Vector2(136, 120)
