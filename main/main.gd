@@ -120,11 +120,16 @@ func scatter():
 	pass
 	
 func _on_big_pellet_picked_up():
-	pass
-	#$Ghost.frighten()
+	score += 50
+	$UI/HUD.update_score(score)
+	
+	blinky.become_frightened()
+	pinky.become_frightened()
+	inky.become_frightened()
+	clyde.become_frightened()
 	
 func _on_small_pellet_picked_up():
-	score += 1
+	score += 10
 	$UI/HUD.update_score(score)
 	dot_counter += 1
 	if not global_dot_counter_active:

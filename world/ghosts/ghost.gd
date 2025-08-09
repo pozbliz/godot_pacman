@@ -17,10 +17,13 @@ var current_state: BehaviorMode = BehaviorMode.IDLE
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_PAUSABLE
-	nav_agent.process_mode = Node.PROCESS_MODE_PAUSABLE
 	hide()
 	screen_size = get_viewport_rect().size
 	add_to_group("enemy")
+	$AnimatedSprite2D.play("default")
+	
+	# Navigation Agent
+	nav_agent.process_mode = Node.PROCESS_MODE_PAUSABLE
 	nav_agent.target_desired_distance = 1.0
 	nav_agent.path_desired_distance = 3.0
 
@@ -33,6 +36,8 @@ func _physics_process(delta: float) -> void:
 			update_scatter_target()
 		BehaviorMode.CHASING:
 			update_chase_target()
+		BehaviorMode.FRIGHTENED:
+			update_frightened_target()
 	
 	if not nav_agent.is_navigation_finished():
 		var next_point = nav_agent.get_next_path_position()
@@ -42,7 +47,7 @@ func _physics_process(delta: float) -> void:
 	
 	velocity = direction * SPEED
 	move_and_slide()
-	if velocity > Vector2.ZERO:
+	if current_state != BehaviorMode.FRIGHTENED and velocity > Vector2.ZERO:
 		$AnimatedSprite2D.play("default")
 		
 	check_screen_warp()
@@ -55,6 +60,10 @@ func update_chase_target() -> void:
 func update_scatter_target() -> void:
 	#nav_agent.set_target_position(Vector2.ZERO)
 	pass
+	
+func update_frightened_target() -> void:
+	var target_position = position + Vector2(randf_range(100.0, 300.0), randf_range(100.0, 300.0))
+	nav_agent.set_target_position(target_position)
 		
 func check_screen_warp():
 	if position.x > screen_size.x:
@@ -67,6 +76,17 @@ func scatter():
 	if player:
 		direction = (player.position - position).normalized() * -1
 		
+func become_frightened():
+	if current_state == BehaviorMode.CHASING:
+		set_current_state("FRIGHTENED")
+		$AnimatedSprite2D.play("frightened")
+		var frightened_timer = get_tree().create_timer(7.0)
+		frightened_timer.timeout.connect(_on_frightened_timer_timeout)
+	
+func _on_frightened_timer_timeout():
+	set_current_state("CHASING")
+	$AnimatedSprite2D.play("default")
+		
 func get_current_state() -> BehaviorMode:
 	return current_state
 	
@@ -78,3 +98,5 @@ func set_current_state(state: String) -> void:
 			current_state = BehaviorMode.CHASING
 		"SCATTERING":
 			current_state = BehaviorMode.SCATTERING
+		"FRIGHTENED":
+			current_state = BehaviorMode.FRIGHTENED

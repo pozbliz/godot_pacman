@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://ccf0fi8w2g260"]
+[gd_scene load_steps=10 format=3 uid="uid://ccf0fi8w2g260"]
 
 [ext_resource type="Script" uid="uid://blqfloqs882t" path="res://world/ghosts/blinky.gd" id="1_w4yt3"]
 [ext_resource type="Texture2D" uid="uid://dko478fp732sn" path="res://assets/blinky.png" id="2_ybuuc"]
+[ext_resource type="Texture2D" uid="uid://bpwig7kl1r6wx" path="res://assets/ghosts_frightened.png" id="3_td2dd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_td2dd"]
 atlas = ExtResource("2_ybuuc")
@@ -9,6 +10,14 @@ region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mjkx8"]
 atlas = ExtResource("2_ybuuc")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b10q2"]
+atlas = ExtResource("3_td2dd")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_27gbn"]
+atlas = ExtResource("3_td2dd")
 region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_b10q2"]
@@ -22,6 +31,17 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b10q2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_27gbn")
+}],
+"loop": true,
+"name": &"frightened",
 "speed": 5.0
 }]
 
@@ -37,6 +57,7 @@ metadata/_custom_type_script = "uid://dr1bqhevtdgtd"
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.7, 0.7)
 sprite_frames = SubResource("SpriteFrames_b10q2")
+animation = &"frightened"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_27gbn")
