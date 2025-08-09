@@ -28,8 +28,8 @@ func _ready() -> void:
 	
 	# Navigation Agent
 	nav_agent.process_mode = Node.PROCESS_MODE_PAUSABLE
-	nav_agent.target_desired_distance = 1.0
-	nav_agent.path_desired_distance = 3.0
+	nav_agent.target_desired_distance = 8.0
+	nav_agent.path_desired_distance = 8.0
 
 func _physics_process(delta: float) -> void:
 	match current_state:
@@ -66,7 +66,7 @@ func update_scatter_target() -> void:
 	pass
 	
 func update_frightened_target() -> void:
-	var target_position = position + Vector2(randf_range(100.0, 300.0), randf_range(100.0, 300.0))
+	var target_position = position + TILE_SIZE * Vector2(randf_range(10.0, 20.0), randf_range(10.0, 200.0))
 	nav_agent.set_target_position(target_position)
 		
 func check_screen_warp():
@@ -110,3 +110,4 @@ func set_current_state(state: String) -> void:
 			
 func return_to_start():
 	position = start_position
+	nav_agent.set_target_position(position)
