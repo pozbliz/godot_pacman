@@ -36,19 +36,19 @@ enemy_scene = SubResource("PackedScene_na0o7")
 [node name="BigPellets" type="Node2D" parent="."]
 
 [node name="BigPellet" parent="BigPellets" groups=["big_pellet"] instance=ExtResource("6_4dugh")]
-position = Vector2(9, 9)
+position = Vector2(24, 104)
 script = ExtResource("6_67ri8")
 
 [node name="BigPellet2" parent="BigPellets" groups=["big_pellet"] instance=ExtResource("6_4dugh")]
-position = Vector2(232, 70)
+position = Vector2(424, 104)
 script = ExtResource("6_67ri8")
 
 [node name="BigPellet3" parent="BigPellets" groups=["big_pellet"] instance=ExtResource("6_4dugh")]
-position = Vector2(9, 169)
+position = Vector2(24, 424)
 script = ExtResource("6_67ri8")
 
 [node name="BigPellet4" parent="BigPellets" groups=["big_pellet"] instance=ExtResource("6_4dugh")]
-position = Vector2(232, 231)
+position = Vector2(424, 424)
 script = ExtResource("6_67ri8")
 
 [node name="SmallPellets" type="Node2D" parent="."]
@@ -83,4 +83,4 @@ one_shot = true
 [node name="StartPositions" type="Node" parent="."]
 
 [node name="PlayerStartPosition" type="Marker2D" parent="StartPositions"]
-position = Vector2(120, 216)
+position = Vector2(232, 424)

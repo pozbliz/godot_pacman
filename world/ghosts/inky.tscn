@@ -46,7 +46,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2skn8"]
-radius = 4.5
+radius = 6.0
 
 [node name="Inky" type="CharacterBody2D"]
 collision_layer = 2
@@ -55,7 +55,6 @@ script = ExtResource("1_su37u")
 metadata/_custom_type_script = "uid://dr1bqhevtdgtd"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.7, 0.7)
 sprite_frames = SubResource("SpriteFrames_37ndu")
 animation = &"frightened"
 
@@ -65,4 +64,4 @@ shape = SubResource("CircleShape2D_2skn8")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="InkyStartPosition" type="Marker2D" parent="."]
-position = Vector2(104, 120)
+position = Vector2(216, 280)

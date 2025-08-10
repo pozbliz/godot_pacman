@@ -46,7 +46,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_27gbn"]
-radius = 4.5
+radius = 6.0
 
 [node name="Blinky" type="CharacterBody2D"]
 collision_layer = 2
@@ -55,7 +55,6 @@ script = ExtResource("1_w4yt3")
 metadata/_custom_type_script = "uid://dr1bqhevtdgtd"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.7, 0.7)
 sprite_frames = SubResource("SpriteFrames_b10q2")
 animation = &"frightened"
 
@@ -66,4 +65,4 @@ shape = SubResource("CircleShape2D_27gbn")
 debug_enabled = true
 
 [node name="BlinkyStartPosition" type="Marker2D" parent="."]
-position = Vector2(120, 104)
+position = Vector2(232, 232)
