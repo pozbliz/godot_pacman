@@ -28,7 +28,7 @@ theme_override_constants/separation = 0
 layout_mode = 2
 size_flags_horizontal = 10
 theme_override_font_sizes/font_size = 15
-text = "Score:"
+text = "Score: "
 
 [node name="ScoreLabel" type="Label" parent="HUD/HBoxContainer"]
 layout_mode = 2
@@ -74,8 +74,8 @@ offset_bottom = 73.0
 grow_horizontal = 2
 grow_vertical = 2
 focus_mode = 2
-theme_override_constants/margin_left = 200
-theme_override_constants/margin_right = 200
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_right = 100
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/MarginContainer"]
 layout_mode = 2
@@ -121,8 +121,8 @@ offset_bottom = 98.0
 grow_horizontal = 2
 grow_vertical = 2
 focus_mode = 2
-theme_override_constants/margin_left = 200
-theme_override_constants/margin_right = 200
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_right = 100
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/MarginContainer"]
 layout_mode = 2
@@ -168,8 +168,8 @@ offset_bottom = 23.0
 grow_horizontal = 2
 grow_vertical = 2
 focus_mode = 2
-theme_override_constants/margin_left = 200
-theme_override_constants/margin_right = 200
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_right = 100
 
 [node name="VBoxContainer" type="VBoxContainer" parent="OptionsMenu/MarginContainer"]
 layout_mode = 2
@@ -200,8 +200,8 @@ offset_bottom = 75.5
 grow_horizontal = 2
 grow_vertical = 2
 focus_mode = 2
-theme_override_constants/margin_left = 200
-theme_override_constants/margin_right = 200
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_right = 100
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HowToPlayMenu/MarginContainer"]
 layout_mode = 2
@@ -219,3 +219,51 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Back To Main Menu"
+
+[node name="GameFinishedScreen" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_wl5ax")
+metadata/_edit_group_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="GameFinishedScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -108.0
+offset_top = -73.0
+offset_right = 108.0
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_right = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameFinishedScreen/MarginContainer"]
+layout_mode = 2
+
+[node name="LevelFinishedText" type="Label" parent="GameFinishedScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Level Finished!"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GameFinishedScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ScoreText" type="Label" parent="GameFinishedScreen/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Score: "
+
+[node name="ScoreLabel" type="Label" parent="GameFinishedScreen/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="ReturnMainMenuButton" type="Button" parent="GameFinishedScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Return To Main Menu"

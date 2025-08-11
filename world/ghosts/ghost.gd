@@ -38,13 +38,10 @@ func _physics_process(delta: float) -> void:
 			direction = Vector2.ZERO
 			velocity = Vector2.ZERO
 		BehaviorMode.SCATTERING:
-			print("enter scatter mode")
 			scatter()
 		BehaviorMode.CHASING:
-			print("enter chase mode")
 			chase()
 		BehaviorMode.FRIGHTENED:
-			print("enter frightened mode")
 			become_frightened()
 	
 	if not nav_agent.is_navigation_finished():

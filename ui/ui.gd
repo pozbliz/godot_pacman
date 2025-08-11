@@ -3,7 +3,7 @@ extends CanvasLayer
 
 signal game_started
 
-enum UIState { MAIN_MENU, PAUSE_MENU, OPTIONS_MENU, GAMEPLAY }
+enum UIState { MAIN_MENU, PAUSE_MENU, OPTIONS_MENU, GAMEPLAY, GAME_FINISHED }
 
 var current_state: UIState = UIState.MAIN_MENU
 var previous_state: UIState = current_state
@@ -23,6 +23,8 @@ func _ready() -> void:
 	
 	$HowToPlayMenu/MarginContainer/VBoxContainer/BackButton.pressed.connect(_on_back_button_pressed)
 	$OptionsMenu/MarginContainer/VBoxContainer/BackButton.pressed.connect(_on_back_button_pressed)
+	
+	$GameFinishedScreen/MarginContainer/VBoxContainer/ReturnMainMenuButton.pressed.connect(_on_return_main_menu_button_pressed)
 	
 func _unhandled_input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("open_menu"):
@@ -59,6 +61,9 @@ func _on_options_button_pressed():
 func _on_exit_game_button_pressed():
 	get_tree().quit()
 	
+func _on_return_main_menu_button_pressed():
+	open_main_menu()
+	
 func open_main_menu():
 	current_state = UIState.MAIN_MENU
 	$MainMenu.show()
@@ -66,6 +71,7 @@ func open_main_menu():
 	$OptionsMenu.hide()
 	$HUD.hide()
 	$HowToPlayMenu.hide()
+	$GameFinishedScreen.hide()
 	get_tree().paused = true
 	
 	$MainMenu/MarginContainer/VBoxContainer/StartGameButton.grab_focus()
@@ -87,6 +93,7 @@ func open_options_menu():
 	$PauseMenu.hide()
 	$OptionsMenu.show()
 	$HUD.hide()
+	$GameFinishedScreen.hide()
 	get_tree().paused = true
 	
 	$OptionsMenu/MarginContainer/VBoxContainer/BackButton.grab_focus()
@@ -98,9 +105,22 @@ func open_how_to_play_menu():
 	$OptionsMenu.hide()
 	$HUD.hide()
 	$HowToPlayMenu.show()
+	$GameFinishedScreen.hide()
 	get_tree().paused = true
 	
 	$HowToPlayMenu/MarginContainer/VBoxContainer/BackButton.grab_focus()
+	
+func show_game_won_screen():
+	current_state = UIState.GAME_FINISHED
+	$MainMenu.hide()
+	$PauseMenu.hide()
+	$OptionsMenu.hide()
+	$HUD.hide()
+	$HowToPlayMenu.hide()
+	$GameFinishedScreen.show()
+	get_tree().paused = true
+	
+	$GameFinishedScreen/MarginContainer/VBoxContainer/ReturnMainMenuButton.grab_focus()
 	
 func start_game():
 	current_state = UIState.GAMEPLAY
@@ -123,5 +143,11 @@ func get_current_state() -> UIState:
 	return current_state
 	
 func is_game_running() -> bool:
-	return $HUD.visible and not $MainMenu.visible and not $PauseMenu.visible and not $OptionsMenu.visible
+	return (
+		$HUD.visible 
+		and not $MainMenu.visible 
+		and not $PauseMenu.visible 
+		and not $OptionsMenu.visible
+		and not $GameFinishedScreen.visible
+	)
 	

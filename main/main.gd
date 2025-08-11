@@ -162,6 +162,11 @@ func _on_small_pellet_picked_up():
 	score += 10
 	$UI/HUD.update_score(score)
 	dot_counter += 1
+	
+	#if get_tree().get_nodes_in_group("small_pellet").is_empty():
+	if score > 20:
+		on_all_pellets_collected()
+	
 	if not global_dot_counter_active:
 		if dot_counter >= 0:
 			activate_ghost(pinky)
@@ -184,6 +189,9 @@ func _on_small_pellet_picked_up():
 			activate_ghost(clyde)
 			global_dot_counter = 0
 			global_dot_counter_active = false
+			
+func on_all_pellets_collected():
+	$UI.show_game_won_screen()
 			
 func _on_enter_frightened():
 	ghosts_frightened = true
