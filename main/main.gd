@@ -1,19 +1,10 @@
 extends Node
 
 
+const MAX_LIVES: int = 3
+
 @export var pellet_scene: PackedScene
 @export var enemy_scene: PackedScene
-
-@onready var player_start = $StartPositions/PlayerStartPosition
-@onready var pellet_tilemap: TileMapLayer = $Maze/PelletMarker
-@onready var blinky: CharacterBody2D = $Ghosts/Blinky
-@onready var pinky: CharacterBody2D = $Ghosts/Pinky
-@onready var inky: CharacterBody2D = $Ghosts/Inky
-@onready var clyde: CharacterBody2D = $Ghosts/Clyde
-
-
-
-const MAX_LIVES: int = 3
 
 var score: int = 0
 var current_lives: int
@@ -22,6 +13,13 @@ var dot_counter: int = 0
 var global_dot_counter_active: bool = false
 var global_dot_counter: int = 0
 var ghosts_frightened: bool = false
+
+@onready var player_start = $StartPositions/PlayerStartPosition
+@onready var pellet_tilemap: TileMapLayer = $Maze/PelletMarker
+@onready var blinky: CharacterBody2D = $Ghosts/Blinky
+@onready var pinky: CharacterBody2D = $Ghosts/Pinky
+@onready var inky: CharacterBody2D = $Ghosts/Inky
+@onready var clyde: CharacterBody2D = $Ghosts/Clyde
 
 
 func _ready() -> void:

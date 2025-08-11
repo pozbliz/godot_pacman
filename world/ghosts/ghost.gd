@@ -1,22 +1,21 @@
-extends CharacterBody2D
 class_name Ghost
+extends CharacterBody2D
 
+
+signal enter_frightened
+signal exit_frightened
 
 enum BehaviorMode { IDLE, CHASING, SCATTERING, FRIGHTENED }
 
-@onready var nav_agent := $NavigationAgent2D
-
 const SPEED = 37.5
 const TILE_SIZE: int = 16
-
 
 var screen_size: Vector2
 var direction: Vector2 = Vector2.ZERO
 var current_state: BehaviorMode = BehaviorMode.IDLE
 var start_position: Vector2
 
-signal enter_frightened
-signal exit_frightened
+@onready var nav_agent := $NavigationAgent2D
 
 
 func _ready() -> void:

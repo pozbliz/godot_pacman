@@ -1,5 +1,5 @@
-extends Ghost
 class_name Inky
+extends Ghost
 
 
 func _ready() -> void:

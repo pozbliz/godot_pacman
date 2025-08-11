@@ -1,12 +1,12 @@
 extends CanvasLayer
 
 
+signal game_started
+
 enum UIState { MAIN_MENU, PAUSE_MENU, OPTIONS_MENU, GAMEPLAY }
 
 var current_state: UIState = UIState.MAIN_MENU
 var previous_state: UIState = current_state
-
-signal game_started
 
 
 func _ready() -> void:

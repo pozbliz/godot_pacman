@@ -1,15 +1,13 @@
-extends CharacterBody2D
 class_name Player
+extends CharacterBody2D
 
 
+signal player_hit
 
 const SPEED = 50.0
 
 var direction: Vector2 = Vector2.ZERO
 var screen_size: Vector2
-
-
-signal player_hit
 
 
 func _ready() -> void:
@@ -18,14 +16,6 @@ func _ready() -> void:
 	screen_size = get_viewport_rect().size
 	add_to_group("player")
 	$Hitbox.body_entered.connect(_on_hitbox_body_entered)
-
-func _physics_process(delta: float) -> void:
-	velocity = direction * SPEED
-	if velocity > Vector2.ZERO:
-		$AnimatedSprite2D.play("default")
-	$AnimatedSprite2D.rotation = direction.angle()
-	move_and_slide()
-	check_screen_warp()
 	
 func _unhandled_input(_event: InputEvent) -> void:
 	if get_tree().paused:
@@ -38,6 +28,14 @@ func _unhandled_input(_event: InputEvent) -> void:
 		direction = Vector2.UP
 	if Input.is_action_just_pressed("move_down"):
 		direction = Vector2.DOWN
+
+func _physics_process(delta: float) -> void:
+	velocity = direction * SPEED
+	if velocity > Vector2.ZERO:
+		$AnimatedSprite2D.play("default")
+	$AnimatedSprite2D.rotation = direction.angle()
+	move_and_slide()
+	check_screen_warp()
 		
 func check_screen_warp():
 	if position.x > screen_size.x:

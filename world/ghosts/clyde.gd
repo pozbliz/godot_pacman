@@ -1,5 +1,5 @@
-extends Ghost
 class_name Clyde
+extends Ghost
 
 
 func _ready() -> void:

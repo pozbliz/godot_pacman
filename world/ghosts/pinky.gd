@@ -1,5 +1,5 @@
-extends Ghost
 class_name Pinky
+extends Ghost
 
 
 const TILES_AHEAD: int = 4

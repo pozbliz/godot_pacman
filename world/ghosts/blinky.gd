@@ -1,5 +1,5 @@
-extends Ghost
 class_name Blinky
+extends Ghost
 
 
 func _ready():

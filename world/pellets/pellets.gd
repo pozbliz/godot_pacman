@@ -1,5 +1,5 @@
-extends Area2D
 class_name Pellet
+extends Area2D
 
 
 signal big_pellet_picked_up
