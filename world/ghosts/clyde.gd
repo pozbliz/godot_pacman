@@ -10,3 +10,6 @@ func update_chase_target() -> void:
 	var player = get_tree().get_first_node_in_group("player")
 	if player:
 		direction = (player.position - position).normalized()
+		
+func update_scatter_target() -> void:
+	nav_agent.set_target_position(Vector2(screen_size.x, screen_size.y))

@@ -13,7 +13,9 @@ const TILE_SIZE: int = 16
 var screen_size: Vector2
 var direction: Vector2 = Vector2.ZERO
 var current_state: BehaviorMode = BehaviorMode.IDLE
+var previous_state: BehaviorMode
 var start_position: Vector2
+var scatter_count: int = 0
 
 @onready var nav_agent := $NavigationAgent2D
 
@@ -36,11 +38,14 @@ func _physics_process(delta: float) -> void:
 			direction = Vector2.ZERO
 			velocity = Vector2.ZERO
 		BehaviorMode.SCATTERING:
-			update_scatter_target()
+			print("enter scatter mode")
+			scatter()
 		BehaviorMode.CHASING:
-			update_chase_target()
+			print("enter chase mode")
+			chase()
 		BehaviorMode.FRIGHTENED:
-			update_frightened_target()
+			print("enter frightened mode")
+			become_frightened()
 	
 	if not nav_agent.is_navigation_finished():
 		var next_point = nav_agent.get_next_path_position()
@@ -55,19 +60,11 @@ func _physics_process(delta: float) -> void:
 		
 	check_screen_warp()
 	
-func update_chase_target() -> void:
+func chase() -> void:
 	var player = get_tree().get_first_node_in_group("player")
 	if player:
 		nav_agent.set_target_position(player.global_position)
-
-func update_scatter_target() -> void:
-	#nav_agent.set_target_position(Vector2.ZERO)
-	pass
 	
-func update_frightened_target() -> void:
-	var target_position = position + TILE_SIZE * Vector2(randf_range(10.0, 20.0), randf_range(10.0, 200.0))
-	nav_agent.set_target_position(target_position)
-		
 func check_screen_warp():
 	if position.x > screen_size.x:
 		position.x = 0
@@ -75,14 +72,19 @@ func check_screen_warp():
 		position.x = screen_size.x
 		
 func scatter():
-	var player = get_tree().get_first_node_in_group("player")
-	if player:
-		direction = (player.position - position).normalized() * -1
-		
+	update_scatter_target()
+	
+func update_scatter_target() -> void:
+	nav_agent.set_target_position(Vector2.ZERO)
+	
+func _on_scatter_timer_timeout():
+	current_state = previous_state
+	
 func become_frightened():
-	if current_state == BehaviorMode.CHASING:
+	if current_state != BehaviorMode.CHASING:
 		enter_frightened.emit()
-		set_current_state("FRIGHTENED")
+		var target_position = position + TILE_SIZE * Vector2(randf_range(10.0, 20.0), randf_range(10.0, 200.0))
+		nav_agent.set_target_position(target_position)
 		$AnimatedSprite2D.play("frightened")
 		var frightened_timer = get_tree().create_timer(7.0)
 		frightened_timer.timeout.connect(_on_frightened_timer_timeout)
@@ -90,13 +92,17 @@ func become_frightened():
 		exit_frightened.emit()
 	
 func _on_frightened_timer_timeout():
-	set_current_state("CHASING")
+	current_state = previous_state
 	$AnimatedSprite2D.play("default")
 		
 func get_current_state() -> BehaviorMode:
 	return current_state
 	
+func get_previous_state() -> BehaviorMode:
+	return previous_state
+	
 func set_current_state(state: String) -> void:
+	previous_state = current_state
 	match state:
 		"IDLE":
 			current_state = BehaviorMode.IDLE

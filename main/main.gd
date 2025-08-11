@@ -13,13 +13,19 @@ var dot_counter: int = 0
 var global_dot_counter_active: bool = false
 var global_dot_counter: int = 0
 var ghosts_frightened: bool = false
+var scatter_chase_schedule = [
+	{ "scatter": 7, "chase": 20 },
+	{ "scatter": 7, "chase": 20 },
+	{ "scatter": 5, "chase": 20 },
+	{ "scatter": 5, "chase": INF }
+]
 
 @onready var player_start = $StartPositions/PlayerStartPosition
 @onready var pellet_tilemap: TileMapLayer = $Maze/PelletMarker
-@onready var blinky: CharacterBody2D = $Ghosts/Blinky
-@onready var pinky: CharacterBody2D = $Ghosts/Pinky
-@onready var inky: CharacterBody2D = $Ghosts/Inky
-@onready var clyde: CharacterBody2D = $Ghosts/Clyde
+@onready var blinky: Ghost = $Ghosts/Blinky
+@onready var pinky: Ghost = $Ghosts/Pinky
+@onready var inky: Ghost = $Ghosts/Inky
+@onready var clyde: Ghost = $Ghosts/Clyde
 
 
 func _ready() -> void:
@@ -35,14 +41,11 @@ func _ready() -> void:
 	$BigPellets/BigPellet3.big_pellet_picked_up.connect(_on_big_pellet_picked_up)
 	$BigPellets/BigPellet4.big_pellet_picked_up.connect(_on_big_pellet_picked_up)
 	
-	blinky.enter_frightened.connect(_on_enter_frightened)
-	blinky.exit_frightened.connect(_on_exit_frightened)
-	pinky.enter_frightened.connect(_on_enter_frightened)
-	pinky.exit_frightened.connect(_on_exit_frightened)
-	inky.enter_frightened.connect(_on_enter_frightened)
-	inky.exit_frightened.connect(_on_exit_frightened)
-	clyde.enter_frightened.connect(_on_enter_frightened)
-	clyde.exit_frightened.connect(_on_exit_frightened)
+	ghosts = [blinky, pinky, inky, clyde]
+	
+	for ghost in ghosts:
+		ghost.enter_frightened.connect(_on_enter_frightened)
+		ghost.exit_frightened.connect(_on_exit_frightened)
 	
 	$Maze.hide()
 	$BigPellets.hide()
@@ -51,7 +54,27 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	pass
+		
+func start_scatter_chase_cycle():
+	await run_scatter_chase_cycle()
+	
+func run_scatter_chase_cycle():
+	for phase in scatter_chase_schedule:
+		# SCATTER
+		set_ghost_mode("SCATTERING")
+		if phase.scatter != INF:
+			await get_tree().create_timer(phase.scatter).timeout
 
+		# CHASE
+		set_ghost_mode("CHASING")
+		if phase.chase != INF:
+			await get_tree().create_timer(phase.chase).timeout
+			
+func set_ghost_mode(mode: String):
+	for ghost in ghosts:
+		if ghost.current_state != ghost.BehaviorMode.IDLE:
+			ghost.set_current_state(mode)
+		
 func _on_ui_game_started():
 	get_tree().paused = true
 
@@ -73,11 +96,9 @@ func _on_ui_game_started():
 	$Player.set_physics_process(true)
 	$Player.set_process_unhandled_input(true)
 	
-func setup_ghosts():
-	pass
-	
 func _on_ready_timer_timeout():
 	get_tree().paused = false
+	start_scatter_chase_cycle()
 	
 func play_main_menu_music():
 	$Audio/AudioGameplay.stop()
@@ -105,7 +126,7 @@ func spawn_pellets():
 func spawn_enemies():
 	reset_ghost_position()
 	
-	blinky.set_current_state("CHASING")
+	blinky.set_current_state("SCATTERING")
 	pinky.set_current_state("IDLE")
 	inky.set_current_state("IDLE")
 	clyde.set_current_state("IDLE")
@@ -132,10 +153,10 @@ func _on_big_pellet_picked_up():
 	score += 50
 	$UI/HUD.update_score(score)
 	
-	blinky.become_frightened()
-	pinky.become_frightened()
-	inky.become_frightened()
-	clyde.become_frightened()
+	blinky.set_current_state("FRIGHTENED")
+	pinky.set_current_state("FRIGHTENED")
+	inky.set_current_state("FRIGHTENED")
+	clyde.set_current_state("FRIGHTENED")
 	
 func _on_small_pellet_picked_up():
 	score += 10

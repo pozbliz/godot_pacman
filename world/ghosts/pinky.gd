@@ -15,3 +15,6 @@ func update_chase_target() -> void:
 		var ahead_offset = player.direction.normalized() * TILE_SIZE * TILES_AHEAD
 		var target_pos = player.global_position + ahead_offset
 		nav_agent.set_target_position(target_pos)
+		
+func update_scatter_target() -> void:
+	nav_agent.set_target_position(Vector2(screen_size.x, 0))
