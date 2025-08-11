@@ -3,7 +3,6 @@ extends Ghost
 
 
 const TILES_AHEAD: int = 4
-const DOT_LIMIT: int = 30
 
 
 func _ready() -> void:

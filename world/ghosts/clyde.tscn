@@ -46,7 +46,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xjg5d"]
-radius = 6.0
+radius = 5.0
 
 [node name="Clyde" type="CharacterBody2D"]
 collision_layer = 2
@@ -62,6 +62,7 @@ animation = &"frightened"
 shape = SubResource("CircleShape2D_xjg5d")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_postprocessing = 1
 
 [node name="ClydeStartPosition" type="Marker2D" parent="."]
 position = Vector2(248, 280)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://cll7kgvs1kooq"]
+[gd_scene load_steps=11 format=4 uid="uid://cll7kgvs1kooq"]
 
 [ext_resource type="Texture2D" uid="uid://b22aihv833htu" path="res://assets/pellet_marker.png" id="3_2sjqv"]
 [ext_resource type="Texture2D" uid="uid://ddr1videdhf2g" path="res://assets/pacman_maze_v2.png" id="3_e27fd"]
@@ -40,9 +40,16 @@ texture = ExtResource("3_2sjqv")
 [sub_resource type="TileSet" id="TileSet_xs8da"]
 sources/0 = SubResource("TileSetAtlasSource_d7xg8")
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_4qd0i"]
+vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+agent_radius = 0.0
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e27fd"]
 texture = ExtResource("3_2sjqv")
 0:0/0 = 0
+0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_4qd0i")
 
 [sub_resource type="TileSet" id="TileSet_d7xg8"]
 navigation_layer_0/layers = 1

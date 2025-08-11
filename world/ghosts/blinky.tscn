@@ -46,7 +46,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_27gbn"]
-radius = 6.0
+radius = 5.0
 
 [node name="Blinky" type="CharacterBody2D"]
 collision_layer = 2
@@ -62,6 +62,7 @@ animation = &"frightened"
 shape = SubResource("CircleShape2D_27gbn")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_postprocessing = 1
 debug_enabled = true
 
 [node name="BlinkyStartPosition" type="Marker2D" parent="."]
