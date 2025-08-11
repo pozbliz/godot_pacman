@@ -146,9 +146,6 @@ func activate_ghost(ghost: Ghost) -> void:
 	if ghost.get_current_state() == Ghost.BehaviorMode.IDLE:
 		ghost.set_current_state("CHASING")
 	
-func scatter():
-	pass
-	
 func _on_big_pellet_picked_up():
 	score += 50
 	$UI/HUD.update_score(score)
@@ -163,8 +160,7 @@ func _on_small_pellet_picked_up():
 	$UI/HUD.update_score(score)
 	dot_counter += 1
 	
-	#if get_tree().get_nodes_in_group("small_pellet").is_empty():
-	if score > 20:
+	if get_tree().get_nodes_in_group("small_pellet").is_empty():
 		on_all_pellets_collected()
 	
 	if not global_dot_counter_active:

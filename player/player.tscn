@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://qymt3rlyjx6q"]
+[gd_scene load_steps=10 format=3 uid="uid://qymt3rlyjx6q"]
 
 [ext_resource type="Script" uid="uid://bcrm6a83c2mnv" path="res://player/player.gd" id="1_oul6g"]
 [ext_resource type="Texture2D" uid="uid://bxhv63nt7quf5" path="res://assets/pacman.png" id="2_rkbax"]
@@ -42,6 +42,8 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_oul6g"]
 radius = 7.5
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_rkbax"]
+
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 14
 script = ExtResource("1_oul6g")
@@ -58,4 +60,4 @@ collision_layer = 16
 collision_mask = 14
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-shape = SubResource("CircleShape2D_oul6g")
+shape = SubResource("CircleShape2D_rkbax")

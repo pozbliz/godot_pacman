@@ -7,7 +7,6 @@ signal exit_frightened
 
 enum BehaviorMode { IDLE, CHASING, SCATTERING, FRIGHTENED }
 
-const SPEED = 37.5
 const TILE_SIZE: int = 16
 
 var screen_size: Vector2
@@ -16,6 +15,9 @@ var current_state: BehaviorMode = BehaviorMode.IDLE
 var previous_state: BehaviorMode
 var start_position: Vector2
 var scatter_count: int = 0
+var frightened_speed: float = 20.0
+var regular_speed: float = 37.5
+var current_speed: float = regular_speed
 
 @onready var nav_agent := $NavigationAgent2D
 
@@ -50,7 +52,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		direction = Vector2.ZERO
 	
-	velocity = direction * SPEED
+	velocity = direction * current_speed
 	move_and_slide()
 	if current_state != BehaviorMode.FRIGHTENED and velocity > Vector2.ZERO:
 		$AnimatedSprite2D.play("default")
@@ -80,6 +82,7 @@ func _on_scatter_timer_timeout():
 func become_frightened():
 	if current_state != BehaviorMode.CHASING:
 		enter_frightened.emit()
+		current_speed = frightened_speed
 		var target_position = position + TILE_SIZE * Vector2(randf_range(10.0, 20.0), randf_range(10.0, 200.0))
 		nav_agent.set_target_position(target_position)
 		$AnimatedSprite2D.play("frightened")
@@ -87,6 +90,7 @@ func become_frightened():
 		frightened_timer.timeout.connect(_on_frightened_timer_timeout)
 		await frightened_timer.timeout
 		exit_frightened.emit()
+		current_speed = regular_speed
 	
 func _on_frightened_timer_timeout():
 	current_state = previous_state

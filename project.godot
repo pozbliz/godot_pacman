@@ -25,6 +25,10 @@ window/size/viewport_width=448
 window/size/viewport_height=576
 window/stretch/mode="canvas_items"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg")
+
 [input]
 
 move_up={
