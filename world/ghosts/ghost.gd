@@ -15,8 +15,8 @@ var current_state: BehaviorMode = BehaviorMode.IDLE
 var previous_state: BehaviorMode
 var start_position: Vector2
 var scatter_count: int = 0
-var frightened_speed: float = 20.0
-var regular_speed: float = 37.5
+var frightened_speed: float = 25.0
+var regular_speed: float = 50.0
 var current_speed: float = regular_speed
 
 @onready var nav_agent := $NavigationAgent2D
@@ -80,7 +80,7 @@ func _on_scatter_timer_timeout():
 	current_state = previous_state
 	
 func become_frightened():
-	if current_state != BehaviorMode.CHASING:
+	if current_state != BehaviorMode.IDLE:
 		enter_frightened.emit()
 		current_speed = frightened_speed
 		var target_position = position + TILE_SIZE * Vector2(randf_range(10.0, 20.0), randf_range(10.0, 200.0))

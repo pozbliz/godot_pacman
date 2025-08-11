@@ -4,7 +4,7 @@ extends CharacterBody2D
 
 signal player_hit
 
-const SPEED = 50.0
+const SPEED = 60.0
 
 var direction: Vector2 = Vector2.ZERO
 var screen_size: Vector2

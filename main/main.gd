@@ -150,10 +150,9 @@ func _on_big_pellet_picked_up():
 	score += 50
 	$UI/HUD.update_score(score)
 	
-	blinky.set_current_state("FRIGHTENED")
-	pinky.set_current_state("FRIGHTENED")
-	inky.set_current_state("FRIGHTENED")
-	clyde.set_current_state("FRIGHTENED")
+	for ghost in ghosts:
+		if ghost.get_current_state() != ghost.BehaviorMode.IDLE:
+			ghost.set_current_state("FRIGHTENED")
 	
 func _on_small_pellet_picked_up():
 	score += 10
