@@ -23,6 +23,7 @@ AudioManager="*res://util/audio_manager.gd"
 
 window/size/viewport_width=448
 window/size/viewport_height=576
+window/size/mode=3
 window/stretch/mode="canvas_items"
 
 [editor_plugins]

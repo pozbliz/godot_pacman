@@ -163,24 +163,24 @@ func _on_small_pellet_picked_up():
 		on_all_pellets_collected()
 	
 	if not global_dot_counter_active:
-		if dot_counter >= 0:
+		if dot_counter >= 0 and pinky.get_current_state() == Ghost.BehaviorMode.IDLE:
 			activate_ghost(pinky)
 			dot_counter = 0
-		if dot_counter >= 19:
+		if dot_counter >= 19 and inky.get_current_state() == Ghost.BehaviorMode.IDLE:
 			activate_ghost(inky)
 			dot_counter = 0
-		if dot_counter >= 38:
+		if dot_counter >= 38 and clyde.get_current_state() == Ghost.BehaviorMode.IDLE:
 			activate_ghost(clyde)
 			dot_counter = 0
 	else:
 		global_dot_counter += 1
-		if global_dot_counter >= 4:
+		if global_dot_counter >= 4 and pinky.get_current_state() == Ghost.BehaviorMode.IDLE:
 			activate_ghost(pinky)
 			global_dot_counter = 0
-		if global_dot_counter >= 11:
+		if global_dot_counter >= 11 and inky.get_current_state() == Ghost.BehaviorMode.IDLE:
 			activate_ghost(inky)
 			global_dot_counter = 0
-		if global_dot_counter >= 20:
+		if global_dot_counter >= 20 and clyde.get_current_state() == Ghost.BehaviorMode.IDLE:
 			activate_ghost(clyde)
 			global_dot_counter = 0
 			global_dot_counter_active = false
@@ -207,6 +207,9 @@ func _on_player_hit(body):
 			$Player.position = player_start.position
 			reset_ghost_position()
 			global_dot_counter_active = true
+			pinky.set_current_state("IDLE")
+			inky.set_current_state("IDLE")
+			clyde.set_current_state("IDLE")
 			$ReadyTimer.start()
 			$UI/HUD.show_message("GET READY")
 	else:
