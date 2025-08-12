@@ -158,6 +158,7 @@ func _on_small_pellet_picked_up():
 	score += 10
 	$UI/HUD.update_score(score)
 	dot_counter += 1
+	AudioManager.play("res://assets/sound/pickup_small_pellet.wav", randf_range(0.95, 1.05))
 	
 	if get_tree().get_nodes_in_group("small_pellet").is_empty():
 		on_all_pellets_collected()
@@ -199,6 +200,7 @@ func _on_player_hit(body):
 		current_lives -= 1
 		$UI/HUD.update_lives(current_lives)
 		# TODO: add lives counter
+		AudioManager.play("res://assets/sound/pacman_life_lost.wav")
 		if current_lives <= 0:
 			game_over()
 		else:
