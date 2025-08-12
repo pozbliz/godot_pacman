@@ -149,6 +149,7 @@ func activate_ghost(ghost: Ghost) -> void:
 func _on_big_pellet_picked_up():
 	score += 50
 	$UI/HUD.update_score(score)
+	AudioManager.play("res://assets/sound/pickup_big_pellet.wav")
 	
 	for ghost in ghosts:
 		if ghost.get_current_state() != ghost.BehaviorMode.IDLE:
