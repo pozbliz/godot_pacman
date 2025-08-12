@@ -222,7 +222,6 @@ func game_over():
 	$Player.set_physics_process(false)
 	$Player.set_process_unhandled_input(false)
 	stop_music()
-	$Player.play_death_animation()
 	await $UI/HUD.show_game_over()
 	$UI.open_main_menu()
 	get_tree().call_group("enemy", "queue_free")

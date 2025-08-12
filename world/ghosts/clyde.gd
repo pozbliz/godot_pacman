@@ -6,7 +6,7 @@ func _ready() -> void:
 	super._ready()
 	start_position = $ClydeStartPosition.position
 
-func update_chase_target() -> void:
+func chase() -> void:
 	# TODO implement Clyde logic
 	var player = get_tree().get_first_node_in_group("player")
 	if player:

@@ -9,7 +9,7 @@ func _ready() -> void:
 	super._ready()
 	start_position = $PinkyStartPosition.position
 
-func update_chase_target() -> void:
+func chase() -> void:
 	var player = get_tree().get_first_node_in_group("player")
 	if player:
 		var ahead_offset = player.direction.normalized() * TILE_SIZE * TILES_AHEAD

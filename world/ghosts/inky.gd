@@ -8,7 +8,7 @@ func _ready() -> void:
 	super._ready()
 	start_position = $InkyStartPosition.position
 
-func update_chase_target() -> void:
+func chase() -> void:
 	# Draw line from Blinky’s position to two tiles in front of Pac-Man, 
 	# then double the length of the line
 	var player = get_tree().get_first_node_in_group("player")

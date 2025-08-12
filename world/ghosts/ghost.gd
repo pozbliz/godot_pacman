@@ -77,7 +77,10 @@ func update_scatter_target() -> void:
 	nav_agent.set_target_position(Vector2.ZERO)
 	
 func _on_scatter_timer_timeout():
-	current_state = previous_state
+	if previous_state == BehaviorMode.FRIGHTENED:
+		current_state = BehaviorMode.CHASING
+	else:
+		current_state = previous_state
 	
 func become_frightened():
 	if current_state != BehaviorMode.IDLE:
@@ -93,7 +96,9 @@ func become_frightened():
 		current_speed = regular_speed
 	
 func _on_frightened_timer_timeout():
-	current_state = previous_state
+	if previous_state == BehaviorMode.CHASING or previous_state == BehaviorMode.IDLE:
+		current_state = previous_state
+	else: current_state = BehaviorMode.CHASING
 	$AnimatedSprite2D.play("default")
 		
 func get_current_state() -> BehaviorMode:
