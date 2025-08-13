@@ -124,6 +124,10 @@ func spawn_pellets():
 		pellet.position = world_pos
 	$SmallPellets.show()
 	
+func spawn_fruits():
+	# TODO implement bonus fruits (stretch goal)
+	pass
+	
 func setup_ghosts():
 	reset_ghost_position()
 	

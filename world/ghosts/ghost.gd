@@ -91,6 +91,7 @@ func become_frightened():
 		$AnimatedSprite2D.play("frightened")
 		var frightened_timer = get_tree().create_timer(7.0)
 		frightened_timer.timeout.connect(_on_frightened_timer_timeout)
+		# TODO add blinking animation before frightened runs out
 		await frightened_timer.timeout
 		exit_frightened.emit()
 		current_speed = regular_speed
