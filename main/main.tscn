@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://eitigiq55372"]
+[gd_scene load_steps=16 format=3 uid="uid://eitigiq55372"]
 
 [ext_resource type="Script" uid="uid://pupn2o3umkd7" path="res://main/main.gd" id="1_pjrb6"]
 [ext_resource type="PackedScene" uid="uid://dtnkl6qjkjy5w" path="res://world/pellets/small_pellet.tscn" id="2_3wy1v"]
@@ -12,6 +12,8 @@
 [ext_resource type="PackedScene" uid="uid://opgvpttfghns" path="res://world/ghosts/pinky.tscn" id="8_na0o7"]
 [ext_resource type="PackedScene" uid="uid://bejj0550v2pnj" path="res://world/ghosts/inky.tscn" id="9_73k8k"]
 [ext_resource type="PackedScene" uid="uid://y0a7fn73j2vn" path="res://world/ghosts/clyde.tscn" id="10_5xyti"]
+[ext_resource type="Script" uid="uid://dqgksdlqbe4b5" path="res://ui/lives_display.gd" id="13_73k8k"]
+[ext_resource type="Texture2D" uid="uid://dd5ge1fpatg41" path="res://assets/lives_icon.png" id="14_5xyti"]
 
 [sub_resource type="PackedScene" id="PackedScene_na0o7"]
 _bundled = {
@@ -84,3 +86,27 @@ one_shot = true
 
 [node name="PlayerStartPosition" type="Marker2D" parent="StartPositions"]
 position = Vector2(232, 424)
+
+[node name="LivesDisplay" type="HBoxContainer" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -352.0
+offset_bottom = 32.0
+grow_horizontal = 2
+theme_override_constants/separation = 5
+script = ExtResource("13_73k8k")
+metadata/_edit_group_ = true
+
+[node name="1" type="TextureRect" parent="LivesDisplay"]
+layout_mode = 2
+texture = ExtResource("14_5xyti")
+
+[node name="2" type="TextureRect" parent="LivesDisplay"]
+layout_mode = 2
+texture = ExtResource("14_5xyti")
+
+[node name="3" type="TextureRect" parent="LivesDisplay"]
+layout_mode = 2
+texture = ExtResource("14_5xyti")

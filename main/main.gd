@@ -81,6 +81,7 @@ func _on_ui_game_started():
 	spawn_pellets()
 	spawn_enemies()
 	current_lives = MAX_LIVES
+	$LivesDisplay.update_health(current_lives)
 	score = 0
 	ghosts_frightened = false
 	$UI/HUD.update_score(score)
@@ -126,21 +127,15 @@ func spawn_pellets():
 func spawn_enemies():
 	reset_ghost_position()
 	
-	blinky.set_current_state("SCATTERING")
-	pinky.set_current_state("IDLE")
-	inky.set_current_state("IDLE")
-	clyde.set_current_state("IDLE")
-	
-	blinky.show()
-	pinky.show()
-	inky.show()
-	clyde.show()
+	for ghost in ghosts:
+		ghost.show()
+		if ghost is not Blinky:
+			ghost.set_current_state("IDLE")
+		blinky.set_current_state("SCATTERING")
 	
 func reset_ghost_position():
-	blinky.return_to_start()
-	pinky.return_to_start()
-	inky.return_to_start()
-	clyde.return_to_start()
+	for ghost in ghosts:
+		ghost.return_to_start()
 	
 func activate_ghost(ghost: Ghost) -> void:
 	if ghost.get_current_state() == Ghost.BehaviorMode.IDLE:
@@ -200,7 +195,7 @@ func _on_player_hit(body):
 	if ghosts_frightened == false:
 		current_lives -= 1
 		$UI/HUD.update_lives(current_lives)
-		# TODO: add lives counter
+		$LivesDisplay.update_health(current_lives)
 		AudioManager.play("res://assets/sound/pacman_life_lost.wav")
 		if current_lives <= 0:
 			game_over()
@@ -227,7 +222,6 @@ func game_over():
 	stop_music()
 	await $UI/HUD.show_game_over()
 	$UI.open_main_menu()
-	get_tree().call_group("enemy", "queue_free")
 	get_tree().call_group("big_pellet", "queue_free")
 	get_tree().call_group("small_pellet", "queue_free")
 	play_main_menu_music()
