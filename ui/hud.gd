@@ -18,11 +18,5 @@ func show_game_over():
 func update_score(score):
 	$HBoxContainer/ScoreLabel.text = str(score)
 	
-func update_highscore(score):
-	pass
-	
-func update_lives(lives):
-	pass
-	
 func _on_message_timer_timeout():
 	$MarginContainer/Message.hide()

@@ -34,6 +34,7 @@ pellet_scene = ExtResource("2_3wy1v")
 enemy_scene = SubResource("PackedScene_na0o7")
 
 [node name="Maze" parent="." instance=ExtResource("6_kfbq2")]
+script = null
 
 [node name="BigPellets" type="Node2D" parent="."]
 

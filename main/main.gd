@@ -194,7 +194,6 @@ func _on_exit_frightened():
 func _on_player_hit(body):
 	if ghosts_frightened == false:
 		current_lives -= 1
-		$UI/HUD.update_lives(current_lives)
 		$LivesDisplay.update_health(current_lives)
 		AudioManager.play("res://assets/sound/pacman_life_lost.wav")
 		if current_lives <= 0:

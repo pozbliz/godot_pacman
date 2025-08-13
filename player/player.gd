@@ -29,7 +29,7 @@ func _unhandled_input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("move_down"):
 		direction = Vector2.DOWN
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	velocity = direction * SPEED
 	if velocity > Vector2.ZERO:
 		$AnimatedSprite2D.play("default")

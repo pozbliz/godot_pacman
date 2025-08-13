@@ -34,7 +34,7 @@ func _ready() -> void:
 	nav_agent.target_desired_distance = 8.0
 	nav_agent.path_desired_distance = 8.0
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	match current_state:
 		BehaviorMode.IDLE:
 			direction = Vector2.ZERO

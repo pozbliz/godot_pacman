@@ -9,7 +9,7 @@ signal small_pellet_picked_up
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 func _on_body_entered(body):
