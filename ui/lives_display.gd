@@ -2,6 +2,8 @@ extends HBoxContainer
 
 var heart_full = preload("res://assets/lives_icon.png")
 
+func _ready() -> void:
+	hide()
 
 func update_health(value):
 	update_simple(value)

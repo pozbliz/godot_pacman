@@ -79,9 +79,10 @@ func _on_ui_game_started():
 	get_tree().paused = true
 
 	spawn_pellets()
-	spawn_enemies()
+	setup_ghosts()
 	current_lives = MAX_LIVES
 	$LivesDisplay.update_health(current_lives)
+	$LivesDisplay.show()
 	score = 0
 	ghosts_frightened = false
 	$UI/HUD.update_score(score)
@@ -122,9 +123,8 @@ func spawn_pellets():
 		pellet.add_to_group("small_pellet")
 		pellet.position = world_pos
 	$SmallPellets.show()
-	pellet_tilemap.clear()
 	
-func spawn_enemies():
+func setup_ghosts():
 	reset_ghost_position()
 	
 	for ghost in ghosts:
@@ -205,9 +205,9 @@ func _on_player_hit(body):
 			$Player.position = player_start.position
 			reset_ghost_position()
 			global_dot_counter_active = true
-			pinky.set_current_state("IDLE")
-			inky.set_current_state("IDLE")
-			clyde.set_current_state("IDLE")
+			for ghost in ghosts:
+				if ghost is not Blinky:
+					ghost.set_current_state("IDLE")
 			$ReadyTimer.start()
 			$UI/HUD.show_message("GET READY")
 	else:
